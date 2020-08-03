@@ -26,40 +26,41 @@
         
         <h1 class="text text-danger font-weight-bolder">Prediction Page</h1>
         
-        <form class='prediction-form'>
+        <form method="POST" action="prediction" class='prediction-form'>
+            {% csrf_token %}
           <div class="form-group">
             <label for="runs" class="font-weight-bolder">Runs scored</label>
-            <input type="number" class="form-control" id="runs" placeholder="" min="0" autocomplete="off">
+            <input type="number" class="form-control" id="runs" placeholder="" min="0" autocomplete="off" name="runs">
           </div>
 
           <div class="form-group">
             <label for="wickets" class="font-weight-bolder">Wickets lost</label>
-            <input type="number" class="form-control" id="wickets" placeholder="" min="0" autocomplete="off">
+            <input type="number" class="form-control" id="wickets" placeholder="" min="0" autocomplete="off" name="wickets">
           </div>
 
           <div class="form-group">
             <label for="runs_last_5" class="font-weight-bolder">Runs in Last 5 overs</label>
-            <input type="number" class="form-control" id="runs_last_5" placeholder="" min="0" autocomplete="off">
+            <input type="number" class="form-control" id="runs_last_5" placeholder="" min="0" autocomplete="off" name="runs_last_5">
           </div>
 
           <div class="form-group">
             <label for="wickets_last_5" class="font-weight-bolder">Wickets lost in last 5 overs</label>
-            <input type="number" class="form-control" id="wickets_last_5" placeholder="" min="0" autocomplete="off">
+            <input type="number" class="form-control" id="wickets_last_5" placeholder="" min="0" autocomplete="off" name="wickets_last_5">
           </div>
 
           <div class="form-group">
             <label for="stricker" class="font-weight-bolder">Striker's score</label>
-            <input type="number" class="form-control" id="stricker" placeholder="" min="0" autocomplete="off">
+            <input type="number" class="form-control" id="stricker" placeholder="" min="0" autocomplete="off" name="striker">
           </div>
 
           <div class="form-group">
             <label for="non-stricker" class="font-weight-bolder">Non Striker's score</label>
-            <input type="number" class="form-control" id="non-stricker" placeholder="" min="0" autocomplete="off">
+            <input type="number" class="form-control" id="non-stricker" placeholder="" min="0" autocomplete="off" name="non-striker">
           </div>
 
           <div class="form-group">
             <label for="bat_team" class="font-weight-bolder">Batting Team</label>
-            <select class="form-control" id="bat_team">
+            <select class="form-control" id="bat_team" name="bat_team">
               <option>Kolkata Knight Riders</option>
               <option>Chennai Super Kings</option>
               <option>Rajasthan Royals</option>
@@ -73,7 +74,7 @@
 
           <div class="form-group">
             <label for="bowl_team" class="font-weight-bolder">Bowling Team</label>
-            <select class="form-control" id="bowl_team">
+            <select class="form-control" id="bowl_team" name="bowl_team">
               <option>Kolkata Knight Riders</option>
               <option>Chennai Super Kings</option>
               <option>Rajasthan Royals</option>
@@ -85,8 +86,11 @@
             </select>
           </div>
 
-          <button type="submit" class="btn btn-success">Predict</button>
-        
+          <button type="submit" class="btn btn-success" name="submit">Predict</button>
+
+
+            <p>{{new_runs}}</p>
+
         </form>      
       </div>
     </center>

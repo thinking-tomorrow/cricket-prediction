@@ -6,4 +6,8 @@ def home(request):
     return render(request, 'home.html')
 
 def prediction(request):
-    return render(request, 'prediction.html')
+    if request.method == 'POST':
+        runs = request.POST['runs']
+        return render(request, 'prediction.html', {'new_runs': runs})
+    else:
+        return render(request, 'prediction.html')
