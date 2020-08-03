@@ -9,6 +9,11 @@ body{
     background-color: rgb(255, 248, 248);
     width: 80%;
     opacity: 0.8;
+    padding: 20px;
+}
+
+.content-outer{
+    margin: 40px;
 }
 
 .prediction-form{
@@ -17,6 +22,14 @@ body{
 
 @media only screen and (max-width: 600px) {
     .prediction-form{
-        width: 90%;
+        width: 95%;
     }
+
+    .content{
+        width: 95%;
+    }
+
+    .content-outer{
+        margin: 10px;
+    }    
 }
