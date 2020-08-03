@@ -1,5 +1,14 @@
 body{
-    background-image: url('../images/background_ipl.jpg');
+    background-image: url('../images/background_ipl2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+}
+
+.content{
+    background-color: rgb(255, 248, 248);
+    width: 80%;
+    opacity: 0.8;
+    padding: 20px;
+    margin: 20px;
 }

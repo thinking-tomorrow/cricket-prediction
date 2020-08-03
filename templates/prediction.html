@@ -21,11 +21,75 @@
     <title>IPL Predictions</title>
   </head>
   <body>
-    <h1 class="text text-danger">Prediction Page</h1>
+    <center>
+      <div class='content'>
+        
+        <h1 class="text text-danger font-weight-bolder">Prediction Page</h1>
+        
+        <form style="width: 30%;">
+          <div class="form-group">
+            <label for="runs" class="font-weight-bolder">Runs scored</label>
+            <input type="number" class="form-control" id="runs" placeholder="">
+          </div>
 
-    <div>
-      <h1>this is a div</h1>      
-    </div>
+          <div class="form-group">
+            <label for="wickets" class="font-weight-bolder">Wickets lost</label>
+            <input type="number" class="form-control" id="wickets" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <label for="runs_last_5" class="font-weight-bolder">Runs in Last 5 overs</label>
+            <input type="number" class="form-control" id="runs_last_5" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <label for="wickets_last_5" class="font-weight-bolder">Wickets lost in last 5 overs</label>
+            <input type="number" class="form-control" id="wickets_last_5" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <label for="stricker" class="font-weight-bolder">Striker's score</label>
+            <input type="number" class="form-control" id="stricker" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <label for="non-stricker" class="font-weight-bolder">Striker's score</label>
+            <input type="number" class="form-control" id="non-stricker" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <label for="bat_team" class="font-weight-bolder">Batting Team</label>
+            <select class="form-control" id="bat_team">
+              <option>Kolkata Knight Riders</option>
+              <option>Chennai Super Kings</option>
+              <option>Rajasthan Royals</option>
+              <option>Mumbai Indians</option>
+              <option>Kings XI Punjab</option>
+              <option>Royal Challengers Bangalore</option>
+              <option>Delhi Daredevils</option>
+              <option>Sunrisers Hyderabad</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="bowl_team" class="font-weight-bolder">Bowling Team</label>
+            <select class="form-control" id="bowl_team">
+              <option>Kolkata Knight Riders</option>
+              <option>Chennai Super Kings</option>
+              <option>Rajasthan Royals</option>
+              <option>Mumbai Indians</option>
+              <option>Kings XI Punjab</option>
+              <option>Royal Challengers Bangalore</option>
+              <option>Delhi Daredevils</option>
+              <option>Sunrisers Hyderabad</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-success">Predict</button>
+        
+        </form>      
+      </div>
+    </center>
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
