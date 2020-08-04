@@ -26,7 +26,7 @@ def predict_score_raw(runs, wickets, overs, runs_last_5, wickets_last_5, striker
     bowl_team='bowl_team_'+bowl_team
     bowl_team_index=cols.index(bowl_team)
     
-    X_temp=np.array([int(runs), int(wickets), int(overs), int(runs_last_5), int(wickets_last_5), int(striker), int(non_striker)])
+    X_temp=np.array([int(runs), int(wickets), float(overs), int(runs_last_5), int(wickets_last_5), int(striker), int(non_striker)])
     X_pred=np.zeros(23)
     X_pred[0:7]=X_temp
     X_pred[bowl_team_index]=1
