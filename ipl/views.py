@@ -33,6 +33,9 @@ def prediction(request):
         return render(request, 'prediction.html')
 
 
+def info(request):
+    return render(request,'info.html')
+
 # def result(request, predicted_score):
 #     if predicted_score != 0:
 #         return render(request, 'result.html', {'status':'success', 'predicted_score': predicted_score})

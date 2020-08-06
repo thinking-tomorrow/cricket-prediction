@@ -1,5 +1,6 @@
-body{
-    background-image: url('../images/background_ipl2.jpg');
+body,html{
+    height:100%;
+    background-image: url('images/background_ipl2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
