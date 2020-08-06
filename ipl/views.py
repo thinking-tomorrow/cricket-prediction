@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 import requests
@@ -24,8 +24,17 @@ def prediction(request):
         
         if response['status']=='success':
             predicted_score=response['data']['predicted_score']
-            return render(request, 'prediction.html', {'status':'success', 'predicted_score': predicted_score})
+            # return redirect(result, predicted_score=predicted_score)
+            return render(request, 'result.html', {'status':'success', 'predicted_score': predicted_score})
         else:
-            return render(request, 'prediction.html', {'status':'failed'})
+            # return redirect(result, predicted_score=0)
+            return render(request, 'result.html', {'status':'failed'})
     else:
         return render(request, 'prediction.html')
+
+
+# def result(request, predicted_score):
+#     if predicted_score != 0:
+#         return render(request, 'result.html', {'status':'success', 'predicted_score': predicted_score})
+#     else:
+#         return render(request, 'result.html', {'status':'failed'})

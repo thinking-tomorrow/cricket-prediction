@@ -25,12 +25,6 @@
       <div class='content'>
         
         <h1 class="text text-danger font-weight-bolder">Prediction Page</h1>
-
-        {% if status == "success" %}
-          <p class="text text-success font-weight-bolder">Predicted Score : {{predicted_score}}</p>
-        {% else %}
-          <p class="text text-danger font-weight-bolder">Sorry! Something went wrong.</p>
-        {% endif %}
         
         <form method="POST" action="prediction" class='prediction-form'>
             {% csrf_token %}
