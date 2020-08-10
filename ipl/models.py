@@ -14,3 +14,4 @@ class Matches(models.Model):
     winner = models.TextField()
     win_by_runs = models.IntegerField()
     win_by_wickets = models.IntegerField()
+    venue = models.TextField()
