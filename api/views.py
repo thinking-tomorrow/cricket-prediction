@@ -68,4 +68,4 @@ def matches(request):
 
     dict = {j[0]:j[1] for j in data}
 
-    return JsonResponse({'status':'success','teams':{dict}})
+    return JsonResponse({'status':'success','teams':dict})
