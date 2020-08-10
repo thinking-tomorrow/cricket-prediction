@@ -16,6 +16,4 @@ class Matches(models.Model):
     win_by_wickets = models.IntegerField()
     venue = models.TextField()
     mom = models.TextField()
-    umpire_1 = models.TextField()
-    umpire_2 = models.TextField()
-    umpire_3 = models.TextField()
+    
