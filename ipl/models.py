@@ -5,5 +5,12 @@ class Matches(models.Model):
     season = models.IntegerField()
     city = models.TextField()
     date = models.DateField()
-    
-    
+    team1 = models.TextField()
+    team2 = models.TextField()
+    toss_winner = models.TextField()
+    toss_decision = models.TextField()
+    result = models.TextField()
+    dl_applied = models.IntegerField()
+    winner = models.TextField()
+    win_by_runs = models.IntegerField()
+    win_by_wickets = models.IntegerField()
