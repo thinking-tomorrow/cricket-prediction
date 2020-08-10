@@ -3,9 +3,12 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
+import json
+
 import pickle
 import numpy as np
 
+from sqlalchemy import create_engine
 # Create your views here.
 
 cols = ['runs', 'wickets', 'overs', 'runs_last_5', 'wickets_last_5', 'striker',
@@ -49,3 +52,20 @@ def predict_score(request):
         return JsonResponse({'status': 'success', 'data':{'predicted_score': predicted_score}})
     else:
         return JsonResponse({'status': 'failed'})
+
+
+def matches(request):
+    engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
+
+    def get_match_winner_list():
+        sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
+        with engine.connect() as connection:
+            result = connection.execute(sql)
+            return result.fetchall()
+
+
+    data = get_match_winner_list()
+
+    dict = {j[0]:j[1] for j in data}
+    
+    return JsonResponse({'status':'success','teams':{dict}})
