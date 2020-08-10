@@ -69,3 +69,26 @@ def matches(request):
     dict = {j[0]:j[1] for j in data}
 
     return JsonResponse({'status':'success','teams':dict})
+
+def maximum_winners(request):
+    engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
+
+    def get_match_winner_list():
+        sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
+        with engine.connect() as connection:
+            result = connection.execute(sql)
+            return result.fetchall()
+
+    data = get_match_winner_list()
+
+    max = 0
+    team = ''
+
+    for j in data:
+         if j[1] > max:
+             team = j[0]
+             max = j[1]
+
+    dict = {team:max}
+
+    return JsonResponse({'status':'success','max_team':dict})
