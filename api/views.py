@@ -67,5 +67,5 @@ def matches(request):
     data = get_match_winner_list()
 
     dict = {j[0]:j[1] for j in data}
-    
+
     return JsonResponse({'status':'success','teams':{dict}})
