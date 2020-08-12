@@ -20,7 +20,7 @@ def prediction(request):
         data['bat_team'] = request.POST['bat_team']
         data['bowl_team'] = request.POST['bowl_team']
 
-        response=requests.post(url='http://localhost:8000/api/predict-score', data=data).json()
+        response=requests.post(url='http://localhost:8000/api/predict_score', data=data).json()
         
         if response['status']=='success':
             predicted_score=response['data']['predicted_score']
@@ -35,6 +35,10 @@ def prediction(request):
 
 def info(request):
     return render(request,'info.html')
+
+
+def visualization(request):
+    return render(request, 'visualization.html')
 
 # def result(request, predicted_score):
 #     if predicted_score != 0:

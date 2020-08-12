@@ -4,11 +4,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 import json
-
 import pickle
 import numpy as np
-
 from sqlalchemy import create_engine
+
 # Create your views here.
 
 cols = ['runs', 'wickets', 'overs', 'runs_last_5', 'wickets_last_5', 'striker',
@@ -21,6 +20,14 @@ cols = ['runs', 'wickets', 'overs', 'runs_last_5', 'wickets_last_5', 'striker',
        'bowl_team_Kolkata Knight Riders', 'bowl_team_Mumbai Indians',
        'bowl_team_Rajasthan Royals', 'bowl_team_Royal Challengers Bangalore',
        'bowl_team_Sunrisers Hyderabad']
+
+teams = ['Sunrisers Hyderabad', 'Mumbai Indians', 'Gujarat Lions',
+       'Rising Pune Supergiants', 'Royal Challengers Bangalore',
+       'Kolkata Knight Riders', 'Delhi Daredevils', 'Kings XI Punjab',
+       'Chennai Super Kings', 'Rajasthan Royals', 'Deccan Chargers',
+       'Kochi Tuskers Kerala', 'Pune Warriors', 'Delhi Capitals']
+
+engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
 
 def predict_score_raw(runs, wickets, overs, runs_last_5, wickets_last_5, striker, non_striker, bat_team, bowl_team):
     bat_team='bat_team_'+bat_team
@@ -54,41 +61,24 @@ def predict_score(request):
         return JsonResponse({'status': 'failed'})
 
 
-def matches(request):
-    engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
+def get_match_winners(request):
+    # engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
 
-    def get_match_winner_list():
-        sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
+    sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
+    with engine.connect() as connection:
+        result = connection.execute(sql)
+        data = result.fetchall()
+
+    data_dict = {j[0]:j[1] for j in data}
+    return JsonResponse({'status':'success','teams':data_dict})
+
+
+def get_matches_played(request):
+    matches={}
+    for team in teams:
+        sql=f"SELECT COUNT(*) FROM matches WHERE team1='{team}' OR team2='{team}'"
         with engine.connect() as connection:
             result = connection.execute(sql)
-            return result.fetchall()
-
-
-    data = get_match_winner_list()
-
-    dict = {j[0]:j[1] for j in data}
-
-    return JsonResponse({'status':'success','teams':dict})
-
-def maximum_winners(request):
-    engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
-
-    def get_match_winner_list():
-        sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
-        with engine.connect() as connection:
-            result = connection.execute(sql)
-            return result.fetchall()
-
-    data = get_match_winner_list()
-
-    max = 0
-    team = ''
-
-    for j in data:
-         if j[1] > max:
-             team = j[0]
-             max = j[1]
-
-    dict = {team:max}
-
-    return JsonResponse({'status':'success','max_team':dict})
+            matches[team]=result.fetchone()[0]
+    
+    return JsonResponse({'status':'success','teams':matches})
