@@ -107,3 +107,19 @@ def get_season_matches_played(request, season):
         return JsonResponse({'status':'success','teams':matches})
     else:
         return JsonResponse({'status':'failed'})
+
+
+def get_max_moms(request):
+    sql = "SELECT player_of_match, COUNT(*) FROM matches GROUP BY player_of_match ORDER BY COUNT(*) DESC LIMIT 15"
+    data=execute_query(sql)
+    data_dict = {j[0]:j[1] for j in data}
+    return JsonResponse({'status':'success','teams':data_dict})
+
+def get_season_max_moms(request, season):
+    if 2008<=season<=2019:
+        sql = f"SELECT player_of_match, COUNT(*) FROM matches WHERE season='{season}' GROUP BY player_of_match ORDER BY COUNT(*) DESC LIMIT 5"
+        data=execute_query(sql)
+        data_dict = {j[0]:j[1] for j in data}
+        return JsonResponse({'status':'success','teams':data_dict})
+    else:
+        return JsonResponse({'status':'failed'})

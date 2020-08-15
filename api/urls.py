@@ -8,6 +8,8 @@ urlpatterns = [
 
     path('match_played',views.get_matches_played,name='match_played'),
     path('season_match_played/<int:season>',views.get_season_matches_played,name='season_match_played'),
-    # path('maximum_winners',views.maximum_winners,name='maximum_winners')
+
+    path('max_moms',views.get_max_moms,name='max_moms'),
+    path('season_max_moms/<int:season>',views.get_season_max_moms,name='season_max_moms'),
 ]
  
