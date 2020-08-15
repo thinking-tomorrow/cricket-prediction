@@ -60,17 +60,28 @@ def predict_score(request):
     else:
         return JsonResponse({'status': 'failed'})
 
-
-def get_match_winners(request):
-    # engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
-
-    sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
+def execute_query(sql):
     with engine.connect() as connection:
         result = connection.execute(sql)
         data = result.fetchall()
+    return data
 
+
+def get_match_winners(request):
+    sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
+    data=execute_query(sql)
     data_dict = {j[0]:j[1] for j in data}
     return JsonResponse({'status':'success','teams':data_dict})
+
+
+def get_season_match_winners(request, season):
+    if 2008<=season<=2019:
+        sql = f"SELECT winner, COUNT(*) AS 'num' FROM matches WHERE season='{season}' GROUP BY winner ORDER BY COUNT(*) DESC"
+        data=execute_query(sql)
+        data_dict = {j[0]:j[1] for j in data}
+        return JsonResponse({'status':'success','teams':data_dict})
+    else:
+        return JsonResponse({'status':'failed'})
 
 
 def get_matches_played(request):
@@ -82,3 +93,17 @@ def get_matches_played(request):
             matches[team]=result.fetchone()[0]
     
     return JsonResponse({'status':'success','teams':matches})
+
+
+def get_season_matches_played(request, season):
+    if 2008<=season<=2019:
+        matches={}
+        for team in teams:
+            sql=f"SELECT COUNT(*) FROM matches WHERE (team1='{team}' OR team2='{team}') AND season='{season}'"
+            with engine.connect() as connection:
+                result = connection.execute(sql)
+                matches[team]=result.fetchone()[0]
+        
+        return JsonResponse({'status':'success','teams':matches})
+    else:
+        return JsonResponse({'status':'failed'})

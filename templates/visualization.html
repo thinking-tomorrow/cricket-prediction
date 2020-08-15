@@ -2,6 +2,39 @@
 
 {% block content %}
 
-<h1>visualization</h1>
+  <h1>visualization</h1>
+
+  <script>
+    function get_url_data(url){
+      $.get(url, function(data){console.log(data)});
+    }
+    function get_match_winners(){
+      url='api/match_winners';
+      $.get(url, function(data){console.log(data)});
+    }
+
+    function get_season_match_winners(season){
+      url='api/season_match_winners/'+season
+      $.get(url, function(data){console.log(data)});
+    }
+
+    function get_match_played(){
+      url='api/match_played'
+      $.get(url, function(data){console.log(data)});
+    }
+
+    function get_season_match_played(season){
+      url='api/season_match_played/'+season
+      $.get(url, function(data){console.log(data)});
+    }
+
+    $(document).ready(function() {
+      get_match_winners();
+      get_match_played();
+
+      get_season_match_winners(2019);
+      get_season_match_played(2019);
+    });
+  </script>
 
 {% endblock content %}
