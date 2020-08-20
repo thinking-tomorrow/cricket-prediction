@@ -5,27 +5,37 @@
   <h1>visualization</h1>
 
   <script>
-    function get_url_data(url){
-      $.get(url, function(data){console.log(data)});
+    function convert_to_list(data){
+      teams=data['teams']; 
+      team_list=[]
+      val_list=[]
+      for (team in teams){
+        team_list.push(team);
+        val_list.push(teams[team]);
+      }
+
+      return [team_list, val_list]
     }
+
     function get_match_winners(){
       url='api/match_winners';
-      $.get(url, function(data){console.log(data)});
+      $.get(url, function(data){console.log(convert_to_list(data))});
     }
 
     function get_season_match_winners(season){
       url='api/season_match_winners/'+season
-      $.get(url, function(data){console.log(data)});
+      $.get(url, function(data){console.log(convert_to_list(data))});
     }
 
     function get_match_played(){
       url='api/match_played'
-      $.get(url, function(data){console.log(data)});
+      $.get(url, function(data){console.log(convert_to_list(data))});
+
     }
 
     function get_season_match_played(season){
       url='api/season_match_played/'+season
-      $.get(url, function(data){console.log(data)});
+      $.get(url, function(data){console.log(convert_to_list(data))});
     }
 
     $(document).ready(function() {
