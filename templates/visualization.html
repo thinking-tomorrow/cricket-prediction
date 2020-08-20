@@ -56,36 +56,37 @@ url='api/match_winners';
 $.get(url, function(data){
   total_list = convert_to_list(data);
   teams = total_list[1];
+  team_names = total_list[0];
+
   console.log(teams);
+
+  document.addEventListener('DOMContentLoaded', function () {
+        var myChart = Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Matches Won by Each Team'
+            },
+            xAxis: {
+                categories: team_names
+            },
+            yAxis: {
+                title: {
+                    text: 'Matches Won'
+                }
+            },
+            series: [{
+                
+                data: teams,
+            }]
+        });
+    });
   });
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-        var myChart = Highcharts.chart('container', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Fruit Consumption'
-            },
-            xAxis: {
-                categories: ['Apples', 'Bananas', 'Oranges']
-            },
-            yAxis: {
-                title: {
-                    text: 'Fruit eaten'
-                }
-            },
-            series: [{
-                name: 'Jane',
-                data: [1, 0, 4]
-            }, {
-                name: 'John',
-                data: [5, 7, 3]
-            }]
-        });
-    });
+
 
 
 </script>
