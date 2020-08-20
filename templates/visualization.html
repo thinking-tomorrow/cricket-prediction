@@ -20,6 +20,7 @@
     function get_match_winners(){
       url='api/match_winners';
       $.get(url, function(data){console.log(convert_to_list(data))});
+      
     }
 
     function get_season_match_winners(season){
@@ -51,7 +52,14 @@
 
 <script>
 
-get_match_winners();
+url='api/match_winners';
+$.get(url, function(data){
+  total_list = convert_to_list(data);
+  teams = total_list[1];
+  console.log(teams);
+  });
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
         var myChart = Highcharts.chart('container', {
