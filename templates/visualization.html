@@ -55,46 +55,11 @@
 
 <div id="container" style="width:100%; height:400px;"></div>
 
-<div id="mom_won" style="width:100%; height:400px;"></div>
+<div id="container2" style="width:100%; height:400px;"></div>
 
 <script>
-url='api/max_moms';
-$.get(url, function(data){
-  
-  mom_data = convert_to_list(data)
-  
 
-  mom_names = mom_data[0];
-  
-  console.log(mom_names);
-  
-  mom_won = mom_data[1];
-
-  document.addEventListener('DOMContentLoaded', function () {
-        var myChart = Highcharts.chart('mom_won', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Man of the Match Awards Won'
-            },
-            xAxis: {
-                categories: mom_names
-            },
-            yAxis: {
-                title: {
-                    text: 'Awards Won'
-                }
-            },
-            series: [{
-                
-                data: mom_won,
-            }]
-        });
-    });
-
-  });
-
+Highcharts.setOptions({ colors: ['#000080','#FFFF00','#800080','#FFD700','#FF0000','#FFC0CB','#00FFFF','#FFA500', });
 
 
 url='api/match_winners';
@@ -129,12 +94,51 @@ $.get(url, function(data){
     });
   });
 
+  url='api/max_moms';
+$.get(url, function(data){
+  
+  mom_data = convert_to_list(data)
+  
+
+  mom_names = mom_data[0];
+  
+  console.log(mom_names);
+  
+  mom_won = mom_data[1];
+
+  
+
+  document.addEventListener('DOMContentLoaded', function () {
+        var newChart = Highcharts.chart('container2', {
+            chart: {
+                type: 'column'
+            },
+            colors: [
+                  '#000000'
+            ],
+            title: {
+                text: 'Man of the Match Awards Won'
+            },
+            xAxis: {
+                categories: mom_names
+            },
+            yAxis: {
+                title: {
+                    text: 'Awards Won'
+                }
+            },
+            
+            series: [{
+                
+                data: mom_won,
+            }]
+        });
+    });
+
+  });
+
 </script>
 
-<script>
 
-
-
-</script>
 
 {% endblock content %}
