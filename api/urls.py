@@ -11,5 +11,8 @@ urlpatterns = [
 
     path('max_moms',views.get_max_moms,name='max_moms'),
     path('season_max_moms/<int:season>',views.get_season_max_moms,name='season_max_moms'),
+
+    path('toss_details',views.get_toss_details,name='toss_details'),
+    path('season_toss_details/<int:season>',views.get_season_toss_details,name='season_toss_details'),
 ]
  

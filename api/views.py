@@ -71,7 +71,7 @@ def get_match_winners(request):
     sql = "SELECT winner, COUNT(*) AS 'num' FROM matches GROUP BY winner ORDER BY COUNT(*) DESC"
     data=execute_query(sql)
     data_dict = {j[0]:j[1] for j in data}
-    return JsonResponse({'status':'success','teams':data_dict})
+    return JsonResponse({'status':'success','data':data_dict})
 
 
 def get_season_match_winners(request, season):
@@ -79,7 +79,7 @@ def get_season_match_winners(request, season):
         sql = f"SELECT winner, COUNT(*) AS 'num' FROM matches WHERE season='{season}' GROUP BY winner ORDER BY COUNT(*) DESC"
         data=execute_query(sql)
         data_dict = {j[0]:j[1] for j in data}
-        return JsonResponse({'status':'success','teams':data_dict})
+        return JsonResponse({'status':'success','data':data_dict})
     else:
         return JsonResponse({'status':'failed'})
 
@@ -92,7 +92,7 @@ def get_matches_played(request):
             result = connection.execute(sql)
             matches[team]=result.fetchone()[0]
     
-    return JsonResponse({'status':'success','teams':matches})
+    return JsonResponse({'status':'success','data':matches})
 
 
 def get_season_matches_played(request, season):
@@ -104,7 +104,7 @@ def get_season_matches_played(request, season):
                 result = connection.execute(sql)
                 matches[team]=result.fetchone()[0]
         
-        return JsonResponse({'status':'success','teams':matches})
+        return JsonResponse({'status':'success','data':matches})
     else:
         return JsonResponse({'status':'failed'})
 
@@ -113,13 +113,37 @@ def get_max_moms(request):
     sql = "SELECT player_of_match, COUNT(*) FROM matches GROUP BY player_of_match ORDER BY COUNT(*) DESC LIMIT 15"
     data=execute_query(sql)
     data_dict = {j[0]:j[1] for j in data}
-    return JsonResponse({'status':'success','teams':data_dict})
+    return JsonResponse({'status':'success','data':data_dict})
 
 def get_season_max_moms(request, season):
     if 2008<=season<=2019:
         sql = f"SELECT player_of_match, COUNT(*) FROM matches WHERE season='{season}' GROUP BY player_of_match ORDER BY COUNT(*) DESC LIMIT 5"
         data=execute_query(sql)
         data_dict = {j[0]:j[1] for j in data}
-        return JsonResponse({'status':'success','teams':data_dict})
+        return JsonResponse({'status':'success','data':data_dict})
+    else:
+        return JsonResponse({'status':'failed'})
+
+
+def get_toss_details(request):
+    sql = "SELECT COUNT(*) FROM matches WHERE toss_winner=winner"
+    data1=execute_query(sql)[0][0]
+
+    sql = "SELECT COUNT(*) FROM matches WHERE toss_winner!=winner"
+    data2=execute_query(sql)[0][0]
+
+    data_dict = {'toss_win-match_win': data1, 'toss_win-match_loss': data2}
+    return JsonResponse({'status':'success','data':data_dict})
+
+def get_season_toss_details(request, season):
+    if 2008<=season<=2019:
+        sql = f"SELECT COUNT(*) FROM matches WHERE toss_winner=winner AND season='{season}'"
+        data1=execute_query(sql)[0][0]
+
+        sql = f"SELECT COUNT(*) FROM matches WHERE toss_winner!=winner AND season='{season}'"
+        data2=execute_query(sql)[0][0]
+        
+        data_dict = {'toss_win-match_win': data1, 'toss_win-match_loss': data2}
+        return JsonResponse({'status':'success','data':data_dict})
     else:
         return JsonResponse({'status':'failed'})
