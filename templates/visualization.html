@@ -98,6 +98,11 @@
       labels = toss_data[0];
       values = toss_data[1];
   
+      toss_win = values[1]
+      toss_loss = values[0]
+      label_1 = labels[0]
+      label_2 = labels[1]
+
       var myChart = Highcharts.chart('pie', {
         chart: {
             type: 'pie'
@@ -106,7 +111,7 @@
             text: 'Fruit Consumption'
         },
         xAxis: {
-            categories: labels
+            
         },
         yAxis: {
             title: {
@@ -114,7 +119,16 @@
             }
         },
         series: [{
-          data: values
+          data: [{
+          name: label_1,
+          y: toss_win,
+          sliced: true,
+          selected: true
+        },{
+        name: label_2,
+          y: toss_loss
+          
+        }]
         }]
       });
     });
