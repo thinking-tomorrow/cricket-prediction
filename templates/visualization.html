@@ -19,8 +19,7 @@
 
     function get_match_winners(){
       url='api/match_winners';
-      $.get(url, function(data){console.log(convert_to_list(data))});
-      
+      $.get(url, function(data){console.log(convert_to_list(data))});      
     }
 
     function get_season_match_winners(season){
@@ -45,11 +44,11 @@
     }
 
     $(document).ready(function() {
-      get_match_winners();
-      get_match_played();
+      //get_match_winners();
+      //get_match_played();
 
-      get_season_match_winners(2019);
-      get_season_match_played(2019);
+      //get_season_match_winners(2019);
+      //get_season_match_played(2019);
     });
   </script>
 
@@ -58,134 +57,62 @@
 <div id="container2" style="width:100%; height:400px;"></div>
 
 <script>
-
-/*
-url='api/match_winners';
-$.get(url, function(data){
-  total_list = convert_to_list(data);
-  teams = total_list[1];
-  team_names = total_list[0];
-
-  console.log(teams);
-
+  
   document.addEventListener('DOMContentLoaded', function () {
-        var myChart = Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
+  
+    url='api/match_winners';
+    $.get(url, function(data){
+      teams_list=convert_to_list(data);
+      teams=teams_list[0];
+      values=teams_list[1];
+  
+      var myChart = Highcharts.chart('container', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Fruit Consumption'
+        },
+        xAxis: {
+            categories: teams
+        },
+        yAxis: {
             title: {
-                text: 'Matches Won by Each Team'
-            },
-            xAxis: {
-                categories: team_names
-            },
-            yAxis: {
-                title: {
-                    text: 'Matches Won'
-                }
-            },
-            series: [{
-               data: teams,
-            }]
-        });
+                text: 'Fruit eaten'
+            }
+        },
+        series: [{
+          data: values
+        }]
+      });
     });
   });
 
-  url='api/max_moms';
-$.get(url, function(data){
-  
-  mom_data = convert_to_list(data)
-  
-
-  mom_names = mom_data[0];
-  
-  console.log(mom_names);
-  
-  mom_won = mom_data[1];
-
-  
-
   document.addEventListener('DOMContentLoaded', function () {
-        var newChart = Highcharts.chart('container2', {
-            chart: {
-                type: 'column'
-            },
-            colors: [
-                  '#000000'
-            ],
-            title: {
-                text: 'Man of the Match Awards Won'
-            },
-            xAxis: {
-                categories: mom_names
-            },
-            yAxis: {
-                title: {
-                    text: 'Awards Won'
-                }
-            },
-            
-            series: [{
-                
-                data: mom_won,
-            }]
-        });
-    });
-
+      var myChart = Highcharts.chart('container2', {
+          chart: {
+              type: 'bar'
+          },
+          title: {
+              text: 'Fruit Consumption 2'
+          },
+          xAxis: {
+              categories: ['Apples', 'Bananas', 'Oranges']
+          },
+          yAxis: {
+              title: {
+                  text: 'Fruit eaten'
+              }
+          },
+          series: [{
+              name: 'Jane',
+              data: [1, 0, 4]
+          }, {
+              name: 'John',
+              data: [5, 7, 3]
+          }]
+      });
   });
-  */
-
-  document.addEventListener('DOMContentLoaded', function () {
-        var myChart = Highcharts.chart('container', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Fruit Consumption'
-            },
-            xAxis: {
-                categories: ['Apples', 'Bananas', 'Oranges']
-            },
-            yAxis: {
-                title: {
-                    text: 'Fruit eaten'
-                }
-            },
-            series: [{
-                name: 'Jane',
-                data: [1, 0, 4]
-            }, {
-                name: 'John',
-                data: [5, 7, 3]
-            }]
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var myChart = Highcharts.chart('container2', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Fruit Consumption'
-            },
-            xAxis: {
-                categories: ['Apples', 'Bananas', 'Oranges']
-            },
-            yAxis: {
-                title: {
-                    text: 'Fruit eaten'
-                }
-            },
-            series: [{
-                name: 'Jane',
-                data: [1, 0, 4]
-            }, {
-                name: 'John',
-                data: [5, 7, 3]
-            }]
-        });
-    });
 
 </script>
 
