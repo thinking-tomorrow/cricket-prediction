@@ -42,18 +42,9 @@
       url='api/max_moms'
       $.get(url, function(data){console.log(convert_to_list(data))});
     }
-
-    $(document).ready(function() {
-      //get_match_winners();
-      //get_match_played();
-
-      //get_season_match_winners(2019);
-      //get_season_match_played(2019);
-    });
   </script>
 
 <div id="container" style="width:100%; height:400px;"></div>
-
 <div id="container2" style="width:100%; height:400px;"></div>
 
 <script>
@@ -89,29 +80,33 @@
   });
 
   document.addEventListener('DOMContentLoaded', function () {
+  
+    url='api/max_moms'
+    $.get(url, function(data){
+      moms_list=convert_to_list(data);
+      moms=moms_list[0];
+      values=moms_list[1];
+  
       var myChart = Highcharts.chart('container2', {
-          chart: {
-              type: 'bar'
-          },
-          title: {
-              text: 'Fruit Consumption 2'
-          },
-          xAxis: {
-              categories: ['Apples', 'Bananas', 'Oranges']
-          },
-          yAxis: {
-              title: {
-                  text: 'Fruit eaten'
-              }
-          },
-          series: [{
-              name: 'Jane',
-              data: [1, 0, 4]
-          }, {
-              name: 'John',
-              data: [5, 7, 3]
-          }]
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Fruit Consumption'
+        },
+        xAxis: {
+            categories: moms
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
+            }
+        },
+        series: [{
+          data: values
+        }]
       });
+    });
   });
 
 </script>
