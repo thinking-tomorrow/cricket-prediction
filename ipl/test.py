@@ -12,9 +12,10 @@ table = soup.find('table')
     print(rows[1])'''
 
 matches_rows = table.find_all('tr')
+matches_rows=matches_rows[1:]
 
 for matches in matches_rows:
 
     new = matches.find_all('td')
     new = list(map(lambda x:str(x.text).replace(',', ''), new))
-    print(new[1])
+    print(new)
