@@ -17,3 +17,9 @@ class Matches(models.Model):
     venue = models.TextField()
     mom = models.TextField()
     
+class Schedule(models.Model):
+    teams = models.TextField()
+    date = models.TextField()
+    day = models.TextField()
+    time = models.TextField()
+    city = models.TextField()
