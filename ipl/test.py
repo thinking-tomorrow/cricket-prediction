@@ -18,4 +18,4 @@ for matches in matches_rows:
 
     new = matches.find_all('td')
     new = list(map(lambda x:str(x.text).replace(',', ''), new))
-    print(new)
+    print(new[0])
