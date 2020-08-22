@@ -76,4 +76,5 @@ def visualization(request):
 #     else:
 #         return render(request, 'result.html', {'status':'failed'})
 
-scrape_schedule()
+def call_func(request):
+    Schedule.load_schedule()
