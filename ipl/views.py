@@ -75,3 +75,5 @@ def visualization(request):
 #         return render(request, 'result.html', {'status':'success', 'predicted_score': predicted_score})
 #     else:
 #         return render(request, 'result.html', {'status':'failed'})
+
+scrape_schedule()
