@@ -16,6 +16,28 @@
 
       return [team_list, val_list]
     }
+
+    function plot_chart(id, type, title, x, y, y_title){
+      var myChart = Highcharts.chart(id, {
+        chart: {
+          type: type
+        },
+        title: {
+          text: title
+        },
+        xAxis: {
+          categories: x
+        },
+        yAxis: {
+          title: {
+            text: y_title
+          }
+        },
+        series: [{
+          data: y
+        }]
+      });
+    }
   </script>
 
 <div id="container" style="width:100%; height:400px;"></div>
@@ -28,63 +50,18 @@
 
 <script>
   
-  document.addEventListener('DOMContentLoaded', function () {
+  $(function(){
   
     url='api/match_winners';
     $.get(url, function(data){
       teams_list=convert_to_list(data);
-      teams=teams_list[0];
-      values=teams_list[1];
-  
-      var myChart = Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Matches Won By Each Team Over the Years'
-        },
-        xAxis: {
-            categories: teams
-        },
-        yAxis: {
-            title: {
-                text: 'Matches won'
-            }
-        },
-        series: [{
-          data: values
-        }]
-      });
+      plot_chart('container', 'column', 'Matches Won By Each Team Over the Years', teams_list[0], teams_list[1], 'Matches Won')
     });
-  });
 
-  document.addEventListener('DOMContentLoaded', function () {
-  
     url='api/max_moms'
     $.get(url, function(data){
       moms_list=convert_to_list(data);
-      moms=moms_list[0];
-      values=moms_list[1];
-  
-      var myChart = Highcharts.chart('container2', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Maximum Man of the Match Awards Won'
-        },
-        xAxis: {
-            categories: moms
-        },
-        yAxis: {
-            title: {
-                text: 'Awards Won'
-            }
-        },
-        series: [{
-          data: values
-        }]
-      });
+      plot_chart('container2', 'column', 'Maximum Man of the Match Awards Won', moms_list[0], moms_list[1], 'Awards Won')
     });
   });
 
@@ -125,9 +102,8 @@
           sliced: true,
           selected: true
         },{
-        name: label_2,
-          y: toss_loss
-          
+          name: label_2,
+          y: toss_loss        
         }]
         }]
       });
