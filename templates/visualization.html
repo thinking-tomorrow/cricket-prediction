@@ -50,17 +50,14 @@
 
 <script>
   
-  document.addEventListener('DOMContentLoaded', function () {
+  $(function(){
   
     url='api/match_winners';
     $.get(url, function(data){
       teams_list=convert_to_list(data);
       plot_chart('container', 'column', 'Matches Won By Each Team Over the Years', teams_list[0], teams_list[1], 'Matches Won')
     });
-  });
 
-  document.addEventListener('DOMContentLoaded', function () {
-  
     url='api/max_moms'
     $.get(url, function(data){
       moms_list=convert_to_list(data);
@@ -105,9 +102,8 @@
           sliced: true,
           selected: true
         },{
-        name: label_2,
-          y: toss_loss
-          
+          name: label_2,
+          y: toss_loss        
         }]
         }]
       });
