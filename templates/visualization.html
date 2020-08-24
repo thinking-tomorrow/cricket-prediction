@@ -1,55 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block custom_header %}
+  <link rel="stylesheet" href="{% static 'css/slider.css' %}">
+  <script src="{% static 'js/chart.js' %}"></script>
+{% endblock custom_header %}
+
 
 {% block content %}
 
-  <h1>visualization</h1>
-
-  <script>
-    function convert_to_list(data){
-      teams=data['data']; 
-      team_list=[]
-      val_list=[]
-      for (team in teams){
-        team_list.push(team);
-        val_list.push(teams[team]);
-      }
-
-      return [team_list, val_list]
-    }
-
-    function plot_chart(id, type, title, x, y, y_title){
-      var myChart = Highcharts.chart(id, {
-        chart: {
-          type: type
-        },
-        title: {
-          text: title
-        },
-        xAxis: {
-          categories: x
-        },
-        yAxis: {
-          title: {
-            text: y_title
-          }
-        },
-        series: [{
-          data: y
-        }]
-      });
-    }
-  </script>
-
   <center>
-    <div>
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="customSwitches">
-        <label class="custom-control-label" for="customSwitches">Seasonal Data</label>
-      </div>
+    <div data-chart-name="container">
+      {% include 'chart_header.html' %}
       <div id="container" style="width:80%; height:400px;"></div>
     </div>
 
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
     
     <div>
       <div class="custom-control custom-switch">
@@ -59,7 +25,7 @@
       <div id="container2" style="width:80%; height:400px;"></div>
     </div>    
     
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
 
     <div>
       <div class="custom-control custom-switch">
@@ -69,73 +35,7 @@
       <div id="pie" style="width:80%; height:400px;"></div>
     </div>    
     
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
   </center>
-
-  <script>
-    
-    $(function(){
-    
-      url='api/match_winners';
-      $.get(url, function(data){
-        teams_list=convert_to_list(data);
-        plot_chart('container', 'column', 'Matches Won By Each Team Over the Years', teams_list[0], teams_list[1], 'Matches Won')
-      });
-
-      url='api/max_moms'
-      $.get(url, function(data){
-        moms_list=convert_to_list(data);
-        plot_chart('container2', 'column', 'Maximum Man of the Match Awards Won', moms_list[0], moms_list[1], 'Awards Won')
-      });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-      url='api/toss_details'
-
-      $.get(url, function(data){
-        toss_data=convert_to_list(data);
-        console.log(toss_data)
-
-        labels = toss_data[0];
-        values = toss_data[1];
-    
-        toss_win = values[1]
-        toss_loss = values[0]
-        label_1 = labels[0]
-        label_2 = labels[1]
-
-        var myChart = Highcharts.chart('pie', {
-          chart: {
-              type: 'pie'
-          },
-          title: {
-              text: 'Fruit Consumption'
-          },
-          xAxis: {
-              
-          },
-          yAxis: {
-              title: {
-                  text: 'Fruit eaten'
-              }
-          },
-          series: [{
-            data: [{
-            name: label_1,
-            y: toss_win,
-            sliced: true,
-            selected: true
-          },{
-            name: label_2,
-            y: toss_loss        
-          }]
-          }]
-        });
-      });
-    });
-
-  </script>
-
-
 
 {% endblock content %}
