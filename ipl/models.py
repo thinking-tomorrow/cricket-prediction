@@ -20,7 +20,8 @@ class Matches(models.Model):
     mom = models.TextField()
     
 class Schedule(models.Model):
-    teams = models.TextField()
+    team1 = models.TextField()
+    team2 = models.TextField()
     date = models.TextField()
     day = models.TextField()
     time = models.TextField()
@@ -48,7 +49,14 @@ class Schedule(models.Model):
             print(new[0])
 
             matches = Schedule()
-            matches.team = new[1]
+            
+            team = new[1]
+
+            team1=team.split('Vs')[0]
+            team2=team.split('Vs')[1]
+
+            matches.team1 = team1
+            matches.team2 = team2
             matches.date = new[2]
             matches.day = new[3]
             matches.time = new[4]

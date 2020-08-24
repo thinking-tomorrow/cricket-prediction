@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from bs4 import BeautifulSoup
 import requests
-from models import Schedule
+from .models import Schedule
 
 def scrape_schedule():
 
@@ -78,3 +78,7 @@ def visualization(request):
 
 def call_func(request):
     Schedule.load_schedule()
+    return HttpResponse()
+
+
+#Schedule.objects.all().delete()
