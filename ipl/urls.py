@@ -7,5 +7,4 @@ urlpatterns = [
     path('info',views.info,name='info'),
     path('visualization', views.visualization, name='visualization'),
     path('call_func',views.call_func,name='call_func')
-    # path('result', views.result, name='result')
 ]

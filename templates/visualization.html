@@ -9,8 +9,10 @@
 
 {% block content %}
 
+  <br><br>
+
   <center>
-    <div data-chart-name="container">
+    <div data-chart-name="container" data-url="match_winners" data-title="Matches Won By Each Team" data-title-y="Matches Won">
       {% include 'chart_header.html' %}
       <div id="container" style="width:80%; height:400px;"></div>
     </div>

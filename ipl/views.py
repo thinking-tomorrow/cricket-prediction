@@ -70,15 +70,7 @@ def info(request):
 def visualization(request):
     return render(request, 'visualization.html')
 
-# def result(request, predicted_score):
-#     if predicted_score != 0:
-#         return render(request, 'result.html', {'status':'success', 'predicted_score': predicted_score})
-#     else:
-#         return render(request, 'result.html', {'status':'failed'})
 
 def call_func(request):
     Schedule.load_schedule()
     return HttpResponse()
-
-
-#Schedule.objects.all().delete()
