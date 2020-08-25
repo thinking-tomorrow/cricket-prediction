@@ -82,3 +82,7 @@ def call_func(request):
 
 
 #Schedule.objects.all().delete()
+
+def schedule(request):
+
+    return render(request, 'schedule.html')
