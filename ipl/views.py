@@ -85,4 +85,6 @@ def call_func(request):
 
 def schedule(request):
 
-    return render(request, 'schedule.html')
+    schedule_all = Schedule.objects.all()
+
+    return render(request, 'schedule.html',{'schedule':schedule_all})
