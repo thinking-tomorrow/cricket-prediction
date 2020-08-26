@@ -34,6 +34,7 @@ function plot_chart(id, type, title, x, y, y_title){
 
 $(document).ready(function(){
     
+  
   url='api/match_winners';
   $.get(url, function(data){
     teams_list=convert_to_list(data);
@@ -46,21 +47,27 @@ $(document).ready(function(){
     plot_chart('container2', 'column', 'Maximum Man of the Match Awards Won', moms_list[0], moms_list[1], 'Awards Won')
   });
 
-  url='api/max_moms'
-  $.get(url, function(data){
-    moms_list=convert_to_list(data);
-    plot_chart('container2', 'column', 'Maximum Man of the Match Awards Won', moms_list[0], moms_list[1], 'Awards Won')
-  });
-
   $('.season_checkbox').change(function(){
     checked=$(this).is(':checked');
-    $('.season_select').toggle();
+    // $('.season_select').toggle();
+    select=$(this).parent().parent().find('.season_select');
+    select.toggle();
     
     if(checked==true){
-
+      select.val('2019').trigger('change')
     }
     else{
-
+      // select=$('.season_select')
+      data_chart=select.parent().parent().attr('data-chart-name');
+      data_url=select.parent().parent().attr('data-url');
+      data_title=select.parent().parent().attr('data-title');
+      data_title_y=select.parent().parent().attr('data-title-y');
+  
+      url='api/'+data_url
+      $.get(url, function(data){
+        data_list=convert_to_list(data);
+        plot_chart(data_chart, 'column', data_title, data_list[0], data_list[1], data_title_y);
+      });
     }
   });
 

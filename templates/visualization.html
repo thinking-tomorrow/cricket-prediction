@@ -12,28 +12,21 @@
   <br><br>
 
   <center>
-    <div data-chart-name="container" data-url="match_winners" data-title="Matches Won By Each Team" data-title-y="Matches Won">
+    <div data-url="match_winners" data-chart-name="container" data-title="Matches Won By Each Team" data-title-y="Matches Won">
       {% include 'chart_header.html' %}
       <div id="container" style="width:80%; height:400px;"></div>
     </div>
 
     <br><br><br><br>
     
-    <div>
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="customSwitches">
-        <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
-      </div>
+    <div data-url="max_moms" data-chart-name="container2" data-title="Maximum Man of the Match Awards Won" data-title-y="Awards Won">
+      {% include 'chart_header.html' %}
       <div id="container2" style="width:80%; height:400px;"></div>
-    </div>    
+    </div>
     
     <br><br><br><br>
 
     <div>
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="customSwitches">
-        <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
-      </div>
       <div id="pie" style="width:80%; height:400px;"></div>
     </div>    
     
