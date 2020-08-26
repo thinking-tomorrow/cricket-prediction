@@ -49,13 +49,15 @@ $(document).ready(function(){
 
   $('.season_checkbox').change(function(){
     checked=$(this).is(':checked');
-    $('.season_select').toggle();
+    // $('.season_select').toggle();
+    select=$(this).parent().parent().find('.season_select');
+    select.toggle();
     
     if(checked==true){
-      $('.season_select').val('2019').trigger('change')
+      select.val('2019').trigger('change')
     }
     else{
-      select=$('.season_select')
+      // select=$('.season_select')
       data_chart=select.parent().parent().attr('data-chart-name');
       data_url=select.parent().parent().attr('data-url');
       data_title=select.parent().parent().attr('data-title');
