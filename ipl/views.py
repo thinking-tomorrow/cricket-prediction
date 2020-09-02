@@ -84,7 +84,6 @@ def call_func(request):
 #Schedule.objects.all().delete()
 
 def schedule(request):
-
     schedule_all = Schedule.objects.all()
-
+    # schedule_all = map(lambda x:print(x.team1), schedule_all)
     return render(request, 'schedule.html',{'schedule':schedule_all})
