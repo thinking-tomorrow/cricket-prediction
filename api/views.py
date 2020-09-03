@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from ipl.models import Schedule
+from django.core import serializers
 
 import json
 import pickle
@@ -147,3 +149,12 @@ def get_season_toss_details(request, season):
         return JsonResponse({'status':'success','data':data_dict})
     else:
         return JsonResponse({'status':'failed'})
+
+
+def schedule(request):
+    schedule_all = Schedule.objects.all()
+    response=[]
+    for match in schedule_all:
+        response.append([match.team1, match.team2, match.time, match.date, match.city])
+
+    return JsonResponse({'status': 'success', 'data': response})
