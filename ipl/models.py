@@ -55,8 +55,8 @@ class Schedule(models.Model):
             team1=team.split('Vs')[0]
             team2=team.split('Vs')[1]
 
-            matches.team1 = team1
-            matches.team2 = team2
+            matches.team1 = team1.strip()
+            matches.team2 = team2.strip()
             matches.date = new[2]
             matches.day = new[3]
             matches.time = new[4]
