@@ -75,18 +75,18 @@ def predict_winner_raw():
     pred_set = pd.DataFrame(pred_set)
     pred_set = pd.get_dummies(pred_set, prefix=['team1', 'team2'], columns=['team1', 'team2'])
 
-    missing_cols = set(fixtures.columns) - set(pred_set.columns)
-    for c in missing_cols:
-        pred_set[c] = 0
-        pred_set = pred_set[fixtures.columns]
+    #missing_cols = set(fixtures.columns) - set(pred_set.columns)
+    #for c in missing_cols:
+    #    pred_set[c] = 0
+    #    pred_set = pred_set[fixtures.columns]
 
 
     pred_set = pred_set.drop(['winner'], axis=1)
     
-    model = pickle.load(open('matches.pkl'),'rb') 
+    model = pickle.load(open('matches.pkl','rb')) 
 
     table = {"team1":[],"team2":[],"winner":[]}
-    predictions = rf.predict(pred_set)
+    predictions = model.predict(pred_set)
     for i in range(fixtures.shape[0]):
         table["team1"].append(backup_pred_set.iloc[i,1])
         table["team2"].append(backup_pred_set.iloc[i,0])
