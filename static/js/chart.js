@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
           type: 'pie'
       },
       title: {
-          text: 'Fruit Consumption'
+          text: 'Toss vs Match-Won'
       },
       xAxis: {
           
@@ -119,14 +119,12 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       series: [{
         data: [{
-        name: label_1,
-        y: toss_win,
-        sliced: true,
-        selected: true
-      },{
-        name: label_2,
-        y: toss_loss        
-      }]
+          name: 'Toss Win - Match Won',
+          y: toss_win,
+        },{
+          name: 'Toss Win - Match Loss',
+          y: toss_loss,
+        }]
       }]
     });
   });

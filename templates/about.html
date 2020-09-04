@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+
+  <style>
+    .detail{
+      margin: 15px;
+      padding: 20px;
+    }
+
+    .detail p{
+      padding: 25px;
+    }
+
+    .content div{
+      padding: 20px;
+    }
+  </style>
+
+    <script>
+      $(document).ready(function (){
+        $('[data-toggle="popover"]').each( function() {
+          //try doing console log out of popover.
+          id = $(this).attr('id');
+
+          if (id=='sajjad'){
+            title_tag = "<h4>Sajjad Ahmed</h4>"
+            content_tag = '<div><p>Studying at Don Bosco School, Park Circus (class 9). A tech geek. Love to code and in love with Java and Python. Inquisitive about electronics.</p><a href="https://github.com/sajjad006" target="_blank"><i class="fas fa-link"></i> https://github.com/sajjad006</a><br><a target="_blank" href="mailto://mailsajjad006@gmail.com"><i class="far fa-envelope-open"></i> mailsajjad006@gmail.com</a><br><a target="_blank" href="https://linkedin.com/in/sajjad006"><i class="fab fa-linkedin-in"></i> LinkedIn</a></div>'
+          }else{
+            title_tag = "<h4>Hrishikesh Bhanja</h4>"
+            content_tag = '<div><p>Student @ Don Bosco School Park Circus - class 9(13 years old). Love Python . Love the subject Computer Science itself . Also have a liking for Maths & Science.</p><a href="https://github.com/Hrishikesh-coder" target="_blank"><i class="fas fa-link"></i> https://github.com/Hrishikesh-coder</a><br><a target="_blank" href="mailto://hrishipotter123@gmail.com"><i class="far fa-envelope-open"></i> hrishipotter123@gmail.com</a><br><a target="_blank" href="https://linkedin.com/in/hrishikesh-bhanja-9348a81b2/"><i class="fab fa-linkedin-in"></i> LinkedIn</a></div>'
+          }
+
+          
+          $(this).popover({
+            title: title_tag, 
+            content: content_tag,
+            html: true,
+            placement: "top",
+            animation: true,
+          }); 
+        });
+
+
+      });
+    </script>
+
+  <center class="content-outer">
+    <div class='content' style="">
+
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="{% static 'images/logo_think_tom.png' %}" style="width: 80%">
+        </div>
+        <div class="col-sm-8">
+          <h3><b>THINKING TOMORROW</b></h3>
+          <p>{% lorem 1 b random %}</p>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-sm-8 col-sm-push-8">
+          <h3><b>WHAT IS THIS WEBSITE ABOUT?</b></h3>
+          <p>{% lorem 1 b random %}</p>
+        </div>
+        <div class="col-sm-4 col-sm-pull-4">
+          <img src="{% static 'images/logo.png' %}" style="width: 100%">
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="{% static 'images/school.jpg' %}" style="width: 80%">
+        </div>
+        <div class="col-sm-8">
+          <h3>WHO ARE WE ?</h3>
+          <p>This website has been created by 
+          <b><a style="color: blue; text-decoration: underline; cursor: pointer" tabindex="0" data-trigger="focus hover" data-toggle="popover" id="sajjad">Sajjad Ahmed</a></b> and 
+          <b><a style="color: blue; text-decoration: underline; cursor: pointer" tabindex="0" data-trigger="focus hover" data-toggle="popover" id="hrishi">Hrishikesh Bhanja</a></b> 
+          
+          of Don bosco School, Park Circus. This is a simple effort by us to arouse consciousness in the minds of people which are buzzing with numerous questions at this moment. This website is completely open source and the 
+          source of the same can be accessed from our GitHub repository. <a href="https://github.com/thinking-tomorrow/Covid19" target="_blank" style="color: blue;">Click here</a> to view the source code.</p>
+        </div>
+      </div>
+
+    </div>
+  </center>
+{% endblock content %}
