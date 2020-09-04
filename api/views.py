@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from ipl.models import Schedule
+from django.core import serializers
+
+import pandas as pd
 
 import json
 import pickle
@@ -46,6 +50,51 @@ def predict_score_raw(runs, wickets, overs, runs_last_5, wickets_last_5, striker
     predicted_score=round(model.predict([X_pred])[0])
     predict_final=f'{int(predicted_score-10)}-{int(predicted_score+10)}'
     return predict_final
+
+
+def predict_winner_raw():
+
+    df = pd.read_sql('matches',engine)
+    df.drop(['id','season','toss_winner','toss_decision','result','dl_applied','player_of_match','umpire1','umpire2','umpire3'],axis=1,inplace=True)
+    df.dropna(inplace=True)
+    df.drop(['city','date','win_by_runs','win_by_wickets','venue'],axis=1,inplace=True)
+    
+    fixtures = pd.read_sql('ipl_schedule',engine)
+    fixtures.drop(['city','time'],axis=1,inplace=True)
+    fixtures.drop(['id','day'],axis=1,inplace=True)
+    pred_set = []
+
+
+    for index, row in fixtures.iterrows():
+        pred_set.append({'team1': row['team1'], 'team2': row['team2'], 'winner': None})
+            
+        pred_set = pd.DataFrame(pred_set)
+        backup_pred_set = pred_set
+
+    pred_set = pd.get_dummies(pred_set, prefix=['team1', 'team2'], columns=['team1', 'team2'])
+
+    missing_cols = set(final.columns) - set(pred_set.columns)
+    for c in missing_cols:
+        pred_set[c] = 0
+        pred_set = pred_set[final.columns]
+
+
+    pred_set = pred_set.drop(['winner'], axis=1)
+    
+    model = pickle.load(open('matches.pkl'),'rb') 
+
+    table = {"team1":[],"team2":[],"winner":[]}
+    predictions = rf.predict(pred_set)
+    for i in range(fixtures.shape[0]):
+        table["team1"].append(backup_pred_set.iloc[i,1])
+        table["team2"].append(backup_pred_set.iloc[i,0])
+        if predictions[i] == 1:
+            table["winner"].append(backup_pred_set.iloc[i, 1])
+        
+        else:
+            table["winner"].append(backup_pred_set.iloc[i, 0])
+        
+    return table  
 
 
 @csrf_exempt
@@ -147,3 +196,12 @@ def get_season_toss_details(request, season):
         return JsonResponse({'status':'success','data':data_dict})
     else:
         return JsonResponse({'status':'failed'})
+
+
+def schedule(request):
+    schedule_all = Schedule.objects.all()
+    response=[]
+    for match in schedule_all:
+        response.append([match.team1, match.team2, match.time, match.date, match.city])
+
+    return JsonResponse({'status': 'success', 'data': response})
