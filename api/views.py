@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
+import pandas as pd
+
 import json
 import pickle
 import numpy as np
@@ -47,6 +49,14 @@ def predict_score_raw(runs, wickets, overs, runs_last_5, wickets_last_5, striker
     predict_final=f'{int(predicted_score-10)}-{int(predicted_score+10)}'
     return predict_final
 
+
+def predict_winner():
+
+    df = pd.read_sql('matches',engine)
+    df.drop(['id','season','toss_winner','toss_decision','result','dl_applied','player_of_match','umpire1','umpire2','umpire3'],axis=1,inplace=True)
+    df.dropna(inplace=True)
+
+    
 
 @csrf_exempt
 @require_http_methods(["POST"])
