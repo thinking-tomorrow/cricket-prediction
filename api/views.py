@@ -96,6 +96,12 @@ def predict_winner_raw():
         
     return table  
 
+def predict_winner(request):
+
+    table = predict_winner_raw()
+
+    return JsonResponse({'status':'success','data':table})
+
 
 @csrf_exempt
 @require_http_methods(["POST"])

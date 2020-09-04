@@ -15,6 +15,7 @@ urlpatterns = [
     path('toss_details',views.get_toss_details,name='toss_details'),
     path('season_toss_details/<int:season>',views.get_season_toss_details,name='season_toss_details'),
 
-    path('schedule', views.schedule, name='schedule')
+    path('schedule', views.schedule, name='schedule'),
+    path('winner',views.predict_winner,name='winner')
 ]
  
