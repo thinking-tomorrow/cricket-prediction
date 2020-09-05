@@ -53,54 +53,30 @@ def predict_score_raw(runs, wickets, overs, runs_last_5, wickets_last_5, striker
 
 
 def predict_winner_raw():
-    """
-    df = pd.read_sql('matches',engine)
-    df.drop(['id','season','toss_winner','toss_decision','result','dl_applied','player_of_match','umpire1','umpire2','umpire3'],axis=1,inplace=True)
-    df.dropna(inplace=True)
-    df.drop(['city','date','win_by_runs','win_by_wickets','venue'],axis=1,inplace=True)
-    """
-
     fixtures = pd.read_sql('ipl_schedule',engine)
     fixtures.drop(['city','time'],axis=1,inplace=True)
     fixtures.drop(['id','day'],axis=1,inplace=True)
     pred_set = []
 
-
-    for index, row in fixtures.iterrows():
-        pred_set.append({'team1': row['team1'], 'team2': row['team2'], 'winner': None})
-            
-        # pred_set = pd.DataFrame(pred_set)
-        backup_pred_set = pred_set
-
-    pred_set = pd.DataFrame(pred_set)
-    pred_set = pd.get_dummies(pred_set, prefix=['team1', 'team2'], columns=['team1', 'team2'])
-
-    #missing_cols = set(fixtures.columns) - set(pred_set.columns)
-    #for c in missing_cols:
-    #    pred_set[c] = 0
-    #    pred_set = pred_set[fixtures.columns]
-
-
-    pred_set = pred_set.drop(['winner'], axis=1)
+    teams_local=fixtures['team1'].unique()
+    teams_local=sorted(teams_local)
     
-    model = pickle.load(open('matches.pkl','rb')) 
-
-    table = {"team1":[],"team2":[],"winner":[]}
-    predictions = model.predict(pred_set)
-    for i in range(fixtures.shape[0]):
-        table["team1"].append(backup_pred_set.iloc[i,1])
-        table["team2"].append(backup_pred_set.iloc[i,0])
-        if predictions[i] == 1:
-            table["winner"].append(backup_pred_set.iloc[i, 1])
-        
-        else:
-            table["winner"].append(backup_pred_set.iloc[i, 0])
-        
-    return table  
+    print(fixtures.shape)
+    
+    for index, row in fixtures.iterrows():
+        X=np.zeros(16)
+        X[teams_local.index(row['team1'])]=1
+        X[teams_local.index(row['team2'])*2]=1
+    
+        model = pickle.load(open('matches_knn.pkl', 'rb'))
+        pred_set.append(model.predict([X])[0])
+    
+    return pred_set
+    
 
 def predict_winner(request):
     table = predict_winner_raw()
-    return JsonResponse({'status':'success','data':table})
+    return JsonResponse({'status':'success','data':json.dumps(table)})
 
 
 @csrf_exempt
