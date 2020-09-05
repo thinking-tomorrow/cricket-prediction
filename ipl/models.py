@@ -63,3 +63,12 @@ class Schedule(models.Model):
             matches.city = new[5]
 
             matches.save()
+
+
+class PointsTable(models.Model):
+
+    team = models.TextField()
+    played = models.IntegerField()
+    won = models.IntegerField()
+    lost = models.IntegerField()
+    points = models.IntegerField()
