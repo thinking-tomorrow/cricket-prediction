@@ -9,5 +9,6 @@ urlpatterns = [
     path('call_func',views.call_func,name='call_func'),
     # path('result', views.result, name='result'),
     path('schedule',views.schedule,name='schedule'),
-    path('about', views.about, name='about')
+    path('about', views.about, name='about'),
+    path('match',views.match,name='match')
 ]
