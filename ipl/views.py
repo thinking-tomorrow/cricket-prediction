@@ -92,4 +92,5 @@ def about(request):
     return render(request, 'about.html')
 
 def match(request):
-    return render(request,'match.html')
+    schedule = Schedule.objects.all()
+    return render(request,'match.html',{'schedule':schedule})
