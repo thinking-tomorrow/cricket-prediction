@@ -6,14 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/74ba14d0ba.js" crossorigin="anonymous"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- My StyleSheet -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -34,6 +28,9 @@
     <!-- FavIcon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
+    <!-- GoogleFonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+
     <style>
       .bg-custom{
         background: rgb(30,172,195);
@@ -49,13 +46,14 @@
     {% block custom_header %}
     {% endblock custom_header %}
 
-    <title>IPL Predictions</title>
+    <title>Cricology</title>
   </head>
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top bg-custom">
       <a class="navbar-brand" href="#">
         <img src="{% static 'images/logo.png' %}" width="38" class="d-inline-block align-top" alt="">
+        Cricology
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -93,7 +91,7 @@
 
     <center>
       <div style="background-color: rgba(238, 142, 18, 0.8); border-radius: 5px; width: 15%">
-        <p style="color: white">Brought with &#x2764; by<br><b><a target="_blank" href="http://www.thinkingtomorrow.cf" style="color: white;">Thinking Tomorrow</a></b></p>
+        <p style="color: white">Brought with &#x2764; by<br><u><b><a target="_blank" href="http://www.thinkingtomorrow.cf" style="color: white;">Thinking Tomorrow</a></b></u></p>
       </div>
     </center>
 
