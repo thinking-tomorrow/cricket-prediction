@@ -66,7 +66,7 @@ def predict_winner_raw():
     for index, row in fixtures.iterrows():
         X=np.zeros(16)
         X[teams_local.index(row['team1'])]=1
-        X[teams_local.index(row['team2'])+7]=1
+        X[teams_local.index(row['team2'])+8]=1
     
         model = pickle.load(open('matches_knn.pkl', 'rb'))
         pred_set.append(model.predict([X])[0])
