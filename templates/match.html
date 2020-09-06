@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block custom_header %}
+  <link rel="stylesheet" href="{% static 'css/blink.css' %}">
+{% endblock custom_header %}
+
 {% block content %}
 
 <style>
@@ -9,19 +14,18 @@
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
     color: white;
   }
-
 </style>
 
 <center class="content-outer">
-  <div class='content'>
-    
-    <table class="table table-responsive" style="width; 40%">
+  <div class='content' style="background: white;">
+    <table class="table table-responsive" style="width: 80%">
       <thead>
         <tr>
           <th>Date</th>
           <th>Team 1</th>
           <th>Team 2</th>
-          <th>Winner</th>
+          <th>Predicted Winner</th>
+          <th>Original Winner</th>
         </tr>
       </thead>
 
@@ -31,11 +35,21 @@
           <tr>
             <th>{{match.date}}</th>
             
-            <th><img src="{% static 'images/'|add:match.team1|add:'.png' %}" widht="50px" height="50px"></img>{{match.team1}}</th>
-            <th><img src="{% static 'images/'|add:match.team2|add:'.png' %}" widht="50px" height="50px"></img>{{match.team2}}</th>
-            
+            <th>{{match.team1_abr}}</th>
+            <th>{{match.team2_abr}}</th>
             <th>{{match.predicted_winner}}</th>
-
+            
+            {% if match.original_winner %}
+              <th>{{match.original_winner}}</th>
+            {% else %}
+              <th>
+                <svg height="20" width="50" class="blinking">
+                  <circle cx="10" cy="10" r="10" fill="green" />
+                  Sorry, your browser does not support inline SVG.  
+                </svg> 
+                TBD
+              </th>
+            {% endif %}
           </tr>
         {% endfor %}
         </tr>

@@ -11,11 +11,6 @@ def scrape_schedule():
 
     table = soup.find('table')
 
-    '''for matches in table:
-
-        rows = matches.find_all('td')
-        print(rows[1])'''
-
     matches_rows = table.find_all('tr')
     matches_rows=matches_rows[1:]
 
@@ -33,7 +28,7 @@ def scrape_schedule():
         matches.city = new[5]
 
         matches.save()        
-# Create your views here.
+
 def home(request):
     return render(request, 'home.html')
 
@@ -80,17 +75,18 @@ def call_func(request):
     Schedule.load_schedule()
     return HttpResponse()
 
-
-#Schedule.objects.all().delete()
-
 def schedule(request):
     schedule_all = Schedule.objects.all()
-    # schedule_all = map(lambda x:print(x.team1), schedule_all)
     return render(request, 'schedule.html',{'schedule':schedule_all})
 
 def about(request):
     return render(request, 'about.html')
 
 def match(request):
-    schedule = Schedule.objects.all()
-    return render(request,'match.html',{'schedule':schedule})
+    schedule_all = Schedule.objects.all()
+
+    for schedule in schedule_all:
+        schedule.team1_abr=schedule.team1.split(' ')[-1][1:-1]
+        schedule.team2_abr=schedule.team2.split(' ')[-1][1:-1]
+
+    return render(request,'match.html',{'schedule':schedule_all})

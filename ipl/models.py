@@ -27,6 +27,7 @@ class Schedule(models.Model):
     time = models.TextField()
     city = models.TextField()
     predicted_winner=models.TextField()
+    original_winner=models.TextField()
 
     def load_schedule():
         

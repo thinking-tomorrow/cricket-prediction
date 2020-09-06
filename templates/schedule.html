@@ -24,7 +24,6 @@
           <th>Team 1</th>
           <th>Team 2</th>
           <th>City</th>
-          <th>Predicted Winner</th>
         </tr>
       </thead>
 
@@ -36,8 +35,6 @@
             <th><img src="{% static 'images/'|add:match.team1|add:'.png' %}" widht="50px" height="50px"></img>{{match.team1}}</th>
             <th><img src="{% static 'images/'|add:match.team2|add:'.png' %}" widht="50px" height="50px"></img>{{match.team2}}</th>
             <th>{{match.city}}</th>
-            <th>{{match.predicted_winner}}</th>
-
           </tr>
         {% endfor %}
       </tbody>
