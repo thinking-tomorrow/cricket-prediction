@@ -187,3 +187,16 @@ def schedule(request):
         response.append([match.team1, match.team2, match.time, match.date, match.city])
 
     return JsonResponse({'status': 'success', 'data': response})
+
+
+def wickets(request):
+
+    df = pd.read_sql('wickets',engine)
+
+    df_wicket = df[df['is_wicket']==1]
+
+    bowlers = df_wicket['bowler'].value_counts()
+
+    bowlers = bowlers.to_dict()
+
+    return JsonResponse({'status':'success','bowlers':bowlers})
