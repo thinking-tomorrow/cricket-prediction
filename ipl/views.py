@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from bs4 import BeautifulSoup
 import requests
-from .models import Schedule
+from .models import Schedule, PointsTable
 
 def scrape_schedule():
 
@@ -90,3 +90,10 @@ def match(request):
         schedule.team2_abr=schedule.team2.split(' ')[-1][1:-1]
 
     return render(request,'match.html',{'schedule':schedule_all})
+
+
+def points_table(request):
+
+    points = PointsTable.objects.order_by('-points')
+
+    return render(request, 'points.html',{'points':points})

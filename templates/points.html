@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+  thead{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
+    color: white;
+  }
+
+</style>
+
+<center class="content-outer">
+  <div class='content' style="background: none; background-color: rgb(255, 248, 248);">
+    
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Played</th>
+          <th>Won</th>
+          <th>Lost</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for teams in points %}
+          <tr>
+            <th>{{teams.team}}</th>
+            <th>{{teams.played}}</th>
+            
+            <th>{{teams.won}}</th>
+            <th>{{teams.lost}}</th>
+            <th>{{teams.points}}</th>
+
+          </tr>
+        {% endfor %}
+      </tbody>
+      
+    </table>
+
+{% endblock content %}

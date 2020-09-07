@@ -10,5 +10,6 @@ urlpatterns = [
     # path('result', views.result, name='result'),
     path('schedule',views.schedule,name='schedule'),
     path('about', views.about, name='about'),
-    path('match',views.match,name='match')
+    path('match',views.match,name='match'),
+    path('points',views.points_table,name='points')
 ]
