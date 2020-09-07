@@ -37,10 +37,38 @@
         background: radial-gradient(circle, rgba(30,172,195,1) 1%, rgba(19,146,217,1) 96%);
       }
 
+      .nav-link{
+        padding: 10px;
+      }
+
       .nav-link:hover{
         background: rgb(7,82,116);
         background: radial-gradient(circle, rgba(7,82,116,1) 100%, rgba(0,74,191,1) 100%);
       }
+
+      .nav-link .fas{
+        margin-left: 10px;
+      }
+
+      #footer{
+        background-color: rgba(238, 142, 18, 0.8); 
+        border-radius: 5px; 
+        width: 15%
+      }
+
+      .fa-angle-right{
+        float: right; margin-right: 10px;display: none
+      }
+
+       @media only screen and (max-width: 600px) {
+         #footer{
+           width: 50%;
+          }
+
+          .fa-angle-right{
+            display: block;
+          }
+       }
     </style>
 
     {% block custom_header %}
@@ -62,28 +90,28 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/" style="color: white;"><i class="fas fa-home"></i> Home</a>
+            <a class="nav-link" href="/" style="color: white;"><i class="fas fa-home"></i> Home <i class="fas fa-angle-right"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/prediction" style="color: white;"><i class="fas fa-chart-line"></i> Score Prediction</a>
+            <a class="nav-link" href="/prediction" style="color: white;"><i class="fas fa-chart-line"></i> Score Prediction <i class="fas fa-angle-right"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/match" style="color: white;"> Match Prediction</a>
+            <a class="nav-link" href="/match" style="color: white;"><i class="fas fa-trophy"></i> Match Prediction <i class="fas fa-angle-right"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/points" style="color: white;">Points Table Prediction</a>
+            <a class="nav-link" href="/points" style="color: white;"><i class="fas fa-table"></i> Points Table Prediction <i class="fas fa-angle-right"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/visualization" style="color: white;"><i class="fas fa-chart-pie"></i> Visualization</a>
+            <a class="nav-link" href="/visualization" style="color: white;"><i class="fas fa-chart-pie"></i> Visualization <i class="fas fa-angle-right"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/info" style="color: white;"><i class="fas fa-info"></i> Info</a>
+            <a class="nav-link" href="/info" style="color: white;"><i class="fas fa-info"></i> Info <i class="fas fa-angle-right"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/schedule" style="color: white;"><i class="far fa-calendar-alt"></i> Schedule</a>
+            <a class="nav-link" href="/schedule" style="color: white;"><i class="fas far fa-calendar-alt"></i> Schedule <i class="fas fa-angle-right"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/about" style="color: white;"><i class="fas fa-user"></i> About</a>
+            <a class="nav-link" href="/about" style="color: white;"><i class="fas fa-user"></i> About <i class="fas fa-angle-right"></i></a>
           </li>
         </ul>
       </div>
@@ -93,7 +121,7 @@
     {% endblock content %}
 
     <center>
-      <div style="background-color: rgba(238, 142, 18, 0.8); border-radius: 5px; width: 15%">
+      <div id="footer">
         <p style="color: white">Brought with &#x2764; by<br><u><b><a target="_blank" href="http://www.thinkingtomorrow.cf" style="color: white;">Thinking Tomorrow</a></b></u></p>
       </div>
     </center>
