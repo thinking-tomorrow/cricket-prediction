@@ -1,5 +1,75 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block custom_header %}
+	<!-- Timer script -->
+	<script src="{% static 'js/timer.js' %}"></script>
+{% endblock custom_header %}
 
 {% block content%}
+
+<script type="text/javascript">
+	/**$(document).ready(function (){
+		$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
+			var x = document.getElementById("sound");
+			x.play();
+		});  
+	});**/
+</script>
+
+<center class="content-outer">
+	<div class="content" style="background: white; color: black">
+		<div class="row">
+			<div class='col-sm-6'>
+				<h3>UPCOMING MATCH</h3>
+				<p id="timer" style="color: red;">10: 50</p>
+				<div>
+					<img src="{% static 'images/Mumbai Indians (MI).png' %}" style="width:150px; height:100px">
+					<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
+					<img src="{% static 'images/Rajasthan Royals (RR).png' %}" style="width:150px; height:100px">
+				</div>
+			</div>
+
+			<div class='col-sm-6'>
+				<h3>LAST MATCH WINNER</h3>
+				<p style="display: inline-block">PREDICTED: KKR</p>
+				<p style="display: inline-block">ORIGINAL: KKR</p>
+				<div>
+					<img src="{% static 'images/Kolkata Knight Riders (KKR).png' %}" style="width:150px; height:100px">
+					<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
+					<img src="{% static 'images/Royal Challengers Bangalore (RCB).png' %}" style="width:150px; height:100px">
+				</div>
+			</div>
+		</div>
+
+		<br><br><br>
+
+		<div class="row">
+			<div class='col-sm-6'>
+				<h3>IPL 2020 PREDICTED WINNER</h3>
+				<img src="{% static 'images/Mumbai Indians (MI).png' %}" style="width:150px; height:100px">
+				<h4>MUMBAI INDIANS</h4>
+				<a href="/match">CLICK HERE FOR MORE DETAILS</a>
+			</div>
+
+			<div class='col-sm-6'>
+				<h3>PREDICT SCORE</h3>
+				<iframe src="https://www.google.com"></iframe>
+				<a href="/match">CLICK HERE</a>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		
+	</div>
+</center>
+
+<audio controls autoplay id='sound' style="display: none;">
+  <!-- <source src="horse.ogg" type="audio/ogg"> -->
+  <source src="{% static 'song.mp3' %}" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 
 {% endblock content%}

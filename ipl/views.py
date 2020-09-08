@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from bs4 import BeautifulSoup
 import requests
 from .models import Schedule, PointsTable
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 def scrape_schedule():
 
@@ -32,6 +33,7 @@ def scrape_schedule():
 def home(request):
     return render(request, 'home.html')
 
+@xframe_options_exempt
 def prediction(request):
     if request.method == 'POST':
         data = {}
