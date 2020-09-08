@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from ipl.models import Schedule
+from ipl.models import Schedule, PointsTable
 from django.core import serializers
 
 import pandas as pd
@@ -200,3 +200,63 @@ def wickets(request):
     bowlers = bowlers.to_dict()
 
     return JsonResponse({'status':'success','data':bowlers})
+
+
+def qualifiers(response):
+
+    points = PointsTable.objects.order_by('-points')[:4]
+
+    k = 1
+
+    qualifier1_set = {'team1':[],'team2':[]}
+
+    eliminator_set = {'team1':[],'team2':[]}
+
+    for team in points:
+
+        if k<3:
+
+            if k<2:
+                
+                qualifier1_set['team1'].append(team.team)
+
+            else:
+
+                qualifier1_set['team2'].append(team.team)
+
+        else:
+
+            if k<4:
+                
+                eliminator_set['team1'].append(team.team)
+
+            else:
+
+                eliminator_set['team2'].append(team.team)
+
+        k+=1
+
+
+    qualifier1_set = pd.DataFrame(qualifier1_set)
+
+    teams_local=qualifier1_set['team1'].unique()
+    teams_local=sorted(teams_local)
+
+
+    for index,row in qualifier1_set.iterrows():
+
+
+        X=np.zeros(16)
+
+
+        X[teams_local.index(row['team1'])] = 1
+        X[teams_local.index(row['team2'])+8] = 1
+        
+        model = pickle.load(open('matches_knn.pkl', 'rb'))
+        
+        print(model.predict([X])[0])
+
+
+
+
+

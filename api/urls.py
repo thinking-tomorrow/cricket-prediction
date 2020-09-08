@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('schedule', views.schedule, name='schedule'),
     path('winner',views.predict_winner,name='winner'),
-    path('wickets',views.wickets,name='wickets')
+    path('wickets',views.wickets,name='wickets'),
+    path('qualifiers',views.qualifiers,name='qualifiers')
 ]
  
