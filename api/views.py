@@ -236,6 +236,21 @@ def qualifiers(response):
 
         k+=1
 
+    team_list = ['Chennai Super Kings (CSK)','Kolkata Knight Riders (KKR)','Kings XI Punjab (KXIP)','Mumbai Indians (MI)']
+
+
+    for team in team_list:
+
+        if team in qualifier1_set['team1'] or team in qualifier1_set['team2']:
+
+            if team in qualifier1_set['team1']:
+
+                qualifier1_set['team1'] = team
+
+            else:
+
+                qualifier1_set['team2'] = team
+
 
     qualifier1_set = pd.DataFrame(qualifier1_set)
 
