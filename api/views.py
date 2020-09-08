@@ -199,4 +199,4 @@ def wickets(request):
 
     bowlers = bowlers.to_dict()
 
-    return JsonResponse({'status':'success','bowlers':bowlers})
+    return JsonResponse({'status':'success','data':bowlers})

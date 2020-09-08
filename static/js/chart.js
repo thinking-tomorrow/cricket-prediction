@@ -129,3 +129,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+$(document).ready(function(){
+
+
+url='api/wickets';
+  $.get(url, function(data){
+    wickets=convert_to_list(data);
+    console.log(wickets)
+
+    plot_chart('wickets', 'column', 'Most Successful Bowlers in IPL', wickets[0], wickets[1], 'Wickets Taken')
+  });
+
+});
+
