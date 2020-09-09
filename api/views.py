@@ -203,18 +203,6 @@ def catches(request):
     return JsonResponse({'status':'success','data':data_dict})
 
 
-def catches(request):
-
-    df = pd.read_sql('wickets',engine)
-
-    df_catch = df[df['dismissal_kind']=='caught']
-
-    fielders = df_catch['fielder'].value_counts()
-
-
-    fielders = fielders.to_dict()
-
-    return JsonResponse({'status':'success','data':fielders})
 
 def qualifiers(response):
 
@@ -237,10 +225,10 @@ def qualifiers(response):
                 eliminator_set['team2'].append(team.team)
         k+=1
 
-    team_list = ['Chennai Super Kings (CSK)','Kolkata Knight Riders (KKR)','Kings XI Punjab (KXIP)','Mumbai Indians (MI)']
+    team_list = ['Chennai Super Kings (CSK)','Kolkata Knight Riders (KKR)','Delhi Capitals (DC)','Kings XI Punjab (KXIP)','Mumbai Indians (MI)','Rajasthan Royals (RR)','Royal Challengers Bangalore (RCB)','Sun Risers Hyderabad (SRH)']
 
     for team in team_list:
-        if team in qualifier1_set['team1'] or team in qualifier1_set['team2']:
+        if team == qualifier1_set['team1'] or team == qualifier1_set['team2']:
             if team in qualifier1_set['team1']:
                 qualifier1_set['team1'] = team
             else:
