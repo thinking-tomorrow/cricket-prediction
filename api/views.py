@@ -203,45 +203,34 @@ def catches(request):
     data_dict = {j[0]:j[1] for j in data}
     return JsonResponse({'status':'success','data':data_dict})
 
+def predict_match_winner(team1, team2):
+    teams_list = sorted([
+        'Sunrisers Hyderabad', 'Mumbai Indians', 'Royal Challengers Bangalore',
+        'Kolkata Knight Riders', 'Kings XI Punjab', 'Chennai Super Kings', 'Rajasthan Royals', 
+        'Delhi Capitals'
+    ])
+    
+    X=np.zeros(16)
+    X[teams_list.index(team1)] = 1
+    X[teams_list.index(team2)+8] = 1
+    
+    model = pickle.load(open('matches_knn.pkl', 'rb'))
+    winner = model.predict([X])
+
+    if winner==team1:
+        return {'winner': team1, 'loser': team2}
+    else: 
+        return {'winner': team2, 'loser': team1}
+
 def qualifiers(response):
-
     points = PointsTable.objects.order_by('-points')[:4]
-    print(points)
-    qualifier1_set = {'team1':points[0],'team2':points[1]}
-    eliminator_set = {'team1':points[2],'team2':points[3]}
 
-    # for team in points:
-    #     if k<3:
-    #         if k<2: 
-    #             qualifier1_set['team1'].append(team.team)
-    #         else:
-    #             qualifier1_set['team2'].append(team.team)
-    #     else:
-    #         if k<4:   
-    #             eliminator_set['team1'].append(team.team)
-    #         else:
-    #             eliminator_set['team2'].append(team.team)
-    #     k+=1
-    print(qualifier1_set, eliminator_set)
+    qualifier1_set = {'team1':points[0].team,'team2':points[1].team}
+    eliminator_set = {'team1':points[2].team,'team2':points[3].team}
 
-    team_list = ['Chennai Super Kings (CSK)','Kolkata Knight Riders (KKR)','Kings XI Punjab (KXIP)','Mumbai Indians (MI)']
+    q1_winner=predict_match_winner(qualifier1_set['team1'], qualifier1_set['team2'])
+    el_winner=predict_match_winner(eliminator_set['team1'], eliminator_set['team2'])
+    q2_winner=predict_match_winner(el_winner['winner'], q1_winner['loser'])
+    final_winner=predict_match_winner(q1_winner['winner'], q2_winner['winner'])
 
-    for team in team_list:
-        if team in qualifier1_set['team1'] or team in qualifier1_set['team2']:
-            if team in qualifier1_set['team1']:
-                qualifier1_set['team1'] = team
-            else:
-                qualifier1_set['team2'] = team
-
-    qualifier1_set = pd.DataFrame(qualifier1_set)
-    teams_local=qualifier1_set['team1'].unique()
-    teams_local=sorted(teams_local)
-
-
-    for index,row in qualifier1_set.iterrows():
-        X=np.zeros(16)
-        X[teams_local.index(row['team1'])] = 1
-        X[teams_local.index(row['team2'])+8] = 1
-        
-        model = pickle.load(open('matches_knn.pkl', 'rb'))
-        print(model.predict([X])[0])
+    return JsonResponse({'status': 'success', 'data':{'winner': final_winner['winner']}})
