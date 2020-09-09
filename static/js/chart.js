@@ -143,3 +143,15 @@ url='api/wickets';
 
 });
 
+$(document).ready(function(){
+
+
+url='api/catches';
+  $.get(url, function(data){
+    wickets=convert_to_list(data);
+    console.log(wickets)
+
+    plot_chart('catches', 'column', 'Most Successful Fielders in IPL', wickets[0], wickets[1], 'Catches Taken')
+  });
+
+});

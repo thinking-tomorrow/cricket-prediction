@@ -203,6 +203,19 @@ def catches(request):
     return JsonResponse({'status':'success','data':data_dict})
 
 
+def catches(request):
+
+    df = pd.read_sql('wickets',engine)
+
+    df_catch = df[df['dismissal_kind']=='caught']
+
+    fielders = df_catch['fielder'].value_counts()
+
+
+    fielders = fielders.to_dict()
+
+    return JsonResponse({'status':'success','data':fielders})
+
 def qualifiers(response):
 
     points = PointsTable.objects.order_by('-points')[:4]
