@@ -22,7 +22,7 @@
 		<div class="row">
 			<div class='col-sm-6'>
 				<h3>UPCOMING MATCH</h3>
-				<p id="timer" style="color: red;">10: 50</p>
+				<b><p id="timer" style="color: red;">10: 50</p></b>
 				<div>
 					<img src="{% static 'images/Mumbai Indians (MI).png' %}" style="width:150px; height:100px">
 					<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
@@ -49,13 +49,27 @@
 				<h3>IPL 2020 PREDICTED WINNER</h3>
 				<img src="{% static 'images/Mumbai Indians (MI).png' %}" style="width:150px; height:100px">
 				<h4>MUMBAI INDIANS</h4>
-				<a href="/match">CLICK HERE FOR MORE DETAILS</a>
+				<a class="btn btn-success" href="/match" role="button">CLICK HERE FOR MORE DETAILS</a>
 			</div>
 
 			<div class='col-sm-6'>
 				<h3>PREDICT SCORE</h3>
-				<iframe src="https://www.google.com"></iframe>
-				<a href="/match">CLICK HERE</a>
+				<a class="btn btn-success" href="/graphs" role="button">CLICK HERE</a>
+			</div>
+		</div>
+
+		<br><br>
+
+		<div class="row">
+			<div class='col-sm-6'>
+				<h3>VISUALIZATION</h3>
+				<img src="{% static 'images/viz.jpg' %}" style="width:350px; height:200px;"><br>
+				<a class="btn btn-success" href="/match" role="button">CLICK HERE</a>
+			</div>
+
+			<div class='col-sm-6'>
+				<h3>PREDICT SCORE</h3>
+				<a class="btn btn-success" href="/graphs" role="button">CLICK HERE</a>
 			</div>
 		</div>
 	</div>
