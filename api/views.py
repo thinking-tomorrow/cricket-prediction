@@ -206,23 +206,23 @@ def catches(request):
 def qualifiers(response):
 
     points = PointsTable.objects.order_by('-points')[:4]
-    
-    k = 1
-    qualifier1_set = {'team1':[],'team2':[]}
-    eliminator_set = {'team1':[],'team2':[]}
+    print(points)
+    qualifier1_set = {'team1':points[0],'team2':points[1]}
+    eliminator_set = {'team1':points[2],'team2':points[3]}
 
-    for team in points:
-        if k<3:
-            if k<2: 
-                qualifier1_set['team1'].append(team.team)
-            else:
-                qualifier1_set['team2'].append(team.team)
-        else:
-            if k<4:   
-                eliminator_set['team1'].append(team.team)
-            else:
-                eliminator_set['team2'].append(team.team)
-        k+=1
+    # for team in points:
+    #     if k<3:
+    #         if k<2: 
+    #             qualifier1_set['team1'].append(team.team)
+    #         else:
+    #             qualifier1_set['team2'].append(team.team)
+    #     else:
+    #         if k<4:   
+    #             eliminator_set['team1'].append(team.team)
+    #         else:
+    #             eliminator_set['team2'].append(team.team)
+    #     k+=1
+    print(qualifier1_set, eliminator_set)
 
     team_list = ['Chennai Super Kings (CSK)','Kolkata Knight Riders (KKR)','Kings XI Punjab (KXIP)','Mumbai Indians (MI)']
 
