@@ -4,6 +4,7 @@
 {% block custom_header %}
 	<!-- Timer script -->
 	<script src="{% static 'js/timer.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/flipcard.css' %}">
 {% endblock custom_header %}
 
 {% block content%}
@@ -19,27 +20,54 @@
 
 <center class="content-outer">
 	<div class="content" style="background: white; color: black">
+
 		<div class="row">
 			<div class='col-sm-6'>
-				<h3>UPCOMING MATCH</h3>
-				<b><p id="timer" style="color: red;">10: 50</p></b>
-				<div>
-					<img src="{% static 'images/Mumbai Indians (MI).png' %}" style="width:150px; height:100px">
-					<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
-					<img src="{% static 'images/Rajasthan Royals (RR).png' %}" style="width:150px; height:100px">
+				<div class="card card-flip h-100">
+					<div class="card-front">
+						<div class="card-body">
+							<h3>UPCOMING MATCH</h3>
+							<b><p id="timer" style="color: red;">10: 50</p></b>
+							<div>
+								<img src="{% static 'images/Mumbai Indians (MI).png' %}" style="width:150px; height:100px">
+								<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
+								<img src="{% static 'images/Rajasthan Royals (RR).png' %}" style="width:150px; height:100px">
+							</div>
+						</div>
+					</div>
+					<div class="card-back bg-white">
+						<div class="card-body">
+							<h3 class="card-title">Back</h3>
+							<p class="card-text">Suprise this one has more more more more content on the back!</p>
+							<a href="#" class="btn btn-outline-secondary">Action</a>
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<div class='col-sm-6'>
-				<h3>LAST MATCH WINNER</h3>
-				<p style="display: inline-block">PREDICTED: KKR</p>
-				<p style="display: inline-block">ORIGINAL: KKR</p>
-				<div>
-					<img src="{% static 'images/Kolkata Knight Riders (KKR).png' %}" style="width:150px; height:100px">
-					<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
-					<img src="{% static 'images/Royal Challengers Bangalore (RCB).png' %}" style="width:150px; height:100px">
+				<div class="card card-flip h-100">
+					<div class="card-front">
+						<div class="card-body">
+							<h3>LAST MATCH WINNER</h3>
+							<p style="display: inline-block">PREDICTED: KKR</p>
+							<p style="display: inline-block">ORIGINAL: KKR</p>
+							<div>
+								<img src="{% static 'images/Kolkata Knight Riders (KKR).png' %}" style="width:150px; height:100px">
+								<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
+								<img src="{% static 'images/Royal Challengers Bangalore (RCB).png' %}" style="width:150px; height:100px">
+							</div>
+						</div>
+					</div>
+					<div class="card-back bg-white">
+						<div class="card-body">
+							<h3 class="card-title">Back</h3>
+							<p class="card-text">Suprise this one has more more more more content on the back!</p>
+							<a href="#" class="btn btn-outline-secondary">Action</a>
+						</div>
+					</div>
 				</div>
-			</div>
+			</div>			
 		</div>
 
 		<br><br><br>
@@ -54,6 +82,7 @@
 
 			<div class='col-sm-6'>
 				<h3>PREDICT SCORE</h3>
+				<img src="{% static 'images/stock_price_arrow.jpg' %}" width="50%"><br>
 				<a class="btn btn-success" href="/graphs" role="button">CLICK HERE</a>
 			</div>
 		</div>
@@ -61,26 +90,22 @@
 		<br><br>
 
 		<div class="row">
-			<div class='col-sm-6'>
+			<div class='col-sm-6 flip-card'>
 				<h3>VISUALIZATION</h3>
 				<img src="{% static 'images/viz.jpg' %}" style="width:350px; height:200px;"><br>
 				<a class="btn btn-success" href="/match" role="button">CLICK HERE</a>
 			</div>
 
 			<div class='col-sm-6'>
-				<h3>PREDICT SCORE</h3>
-				<a class="btn btn-success" href="/graphs" role="button">CLICK HERE</a>
+				<h3>POINTS TABLE</h3>
+				<img src="{% static 'images/points_table.jpg' %}" width="70%" height="70%"><br>
+				<a class="btn btn-success" href="/points" role="button">CLICK HERE</a>
 			</div>
 		</div>
 	</div>
-
-	<div>
-		
-	</div>
 </center>
 
-<audio controls autoplay id='sound' style="display: none;">
-  <source src="horse.ogg" type="audio/ogg"> 
+<audio controls id='sound' style="display: none;">
   <source src="{% static 'song.mp3' %}" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
