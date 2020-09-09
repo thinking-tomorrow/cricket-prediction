@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -202,8 +203,6 @@ def catches(request):
     data_dict = {j[0]:j[1] for j in data}
     return JsonResponse({'status':'success','data':data_dict})
 
-
-
 def qualifiers(response):
 
     points = PointsTable.objects.order_by('-points')[:4]
@@ -225,10 +224,10 @@ def qualifiers(response):
                 eliminator_set['team2'].append(team.team)
         k+=1
 
-    team_list = ['Chennai Super Kings (CSK)','Kolkata Knight Riders (KKR)','Delhi Capitals (DC)','Kings XI Punjab (KXIP)','Mumbai Indians (MI)','Rajasthan Royals (RR)','Royal Challengers Bangalore (RCB)','Sun Risers Hyderabad (SRH)']
+    team_list = ['Chennai Super Kings (CSK)','Kolkata Knight Riders (KKR)','Kings XI Punjab (KXIP)','Mumbai Indians (MI)']
 
     for team in team_list:
-        if team == qualifier1_set['team1'] or team == qualifier1_set['team2']:
+        if team in qualifier1_set['team1'] or team in qualifier1_set['team2']:
             if team in qualifier1_set['team1']:
                 qualifier1_set['team1'] = team
             else:
