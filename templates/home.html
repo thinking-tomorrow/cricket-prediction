@@ -12,14 +12,17 @@
 
 <style>
 	
+  .carousel-item{
+    height: 90vh;
+  }
 
+  .carousel-img{
+    width: 10px;
+  }
 
-.item img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 300px;
-}
+  @media only screen and (max-width: 600px) {
+
+  }
 
 </style>
 
@@ -43,32 +46,32 @@
 
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="height: 825px;">
-        <img src="{% static 'images/ipl.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-item active">
+        <img src="{% static 'images/ipl.jpg' %}" class="d-block w-100" class="carousel-img" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h3><b>IPL 2020</b></h3>
           <p><b>IPL 2020 starts from the 19th of September at the UAE</b></p>
         </div>
       </div>
-      <div class="carousel-item" style="height: 825px;">
-        <img src="{% static 'images/cricology.png' %}" class="d-block w-100" alt="...">
+      <div class="carousel-item">
+        <img src="{% static 'images/cricology.png' %}" class="d-block w-100" class="carousel-img" alt="...">
         <div class="carousel-caption d-none d-md-block">
           <h3><b>Cricology</b></h3>
           <p>Your one-stop cricket destination.</p>
         </div>
       </div>
-      <div class="carousel-item" style="height: 825px;">
-        <img src="{% static 'images/trophy.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-item">
+        <img src="{% static 'images/trophy.jpg' %}" class="d-block w-100" class="carousel-img" alt="...">
         <div class="carousel-caption d-none d-md-block">
           </div>
       </div>
-      <div class="carousel-item" style="height: 825px;">
-        <img src="{% static 'images/all_teams.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-item">
+        <img src="{% static 'images/all_teams.jpg' %}" class="d-block w-100" class="carousel-img" alt="...">
         <div class="carousel-caption d-none d-md-block">
           </div>
       </div>
-      <div class="carousel-item" style="height: 825px;">
-        <img src="{% static 'images/teams.webp' %}" class="d-block w-100" alt="...">
+      <div class="carousel-item">
+        <img src="{% static 'images/teams.webp' %}" class="d-block w-100" class="carousel-img" alt="...">
         <div class="carousel-caption d-none d-md-block">
           </div>
       </div>

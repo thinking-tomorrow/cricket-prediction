@@ -11,5 +11,6 @@ urlpatterns = [
     path('schedule',views.schedule,name='schedule'),
     path('about', views.about, name='about'),
     path('match',views.match,name='match'),
-    path('points',views.points_table,name='points')
+    path('points',views.points_table,name='points'),
+    path('qualifiers',views.qualifiers,name='qualifiers')
 ]

@@ -95,7 +95,9 @@ def match(request):
 
 
 def points_table(request):
-
     points = PointsTable.objects.order_by('-points')
-
     return render(request, 'points.html',{'points':points})
+
+def qualifiers(request):
+    schedule_all = Schedule.objects.all()[56:]
+    return render(request,'qualifier.html',{'schedule':schedule_all})

@@ -20,6 +20,7 @@ class Matches(models.Model):
     mom = models.TextField()
     
 class Schedule(models.Model):
+    qualifier_type=models.TextField(default=None)
     team1 = models.TextField()
     team2 = models.TextField()
     date = models.TextField()

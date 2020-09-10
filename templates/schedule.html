@@ -5,17 +5,17 @@
 
 <style>
 
-  thead{
+  thead, .qualifier-header{
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
     color: white;
   }
 
+  
 </style>
 
 <center class="content-outer">
-  <div class='content' style="background: none; background-color: rgb(255, 248, 248);">
-    
+  <div class='content' style="background: none; background-color: rgb(255, 248, 248);">  
     <table class="table table-responsive">
       <thead>
         <tr>
@@ -23,19 +23,41 @@
           <th>Time</th>
           <th>Team 1</th>
           <th>Team 2</th>
-          <th>City</th>
+          <!--<th>City</th>-->
         </tr>
       </thead>
 
       <tbody>
         {% for match in schedule %}
-          <tr>
-            <th>{{match.date}}</th>
-            <th>{{match.time}}</th>
-            <th><img src="{% static 'images/'|add:match.team1|add:'.png' %}" widht="50px" height="50px"></img>{{match.team1}}</th>
-            <th><img src="{% static 'images/'|add:match.team2|add:'.png' %}" widht="50px" height="50px"></img>{{match.team2}}</th>
-            <th>{{match.city}}</th>
-          </tr>
+          {% if match.qualifier_type %}
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr colspan="5" class='qualifier-header'>
+              <th>{{match.qualifier_type}}</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <th>{{match.date}}</th>
+              <th>{{match.time}}</th>
+              <th>{{match.team1}}</th>
+              <th>{{match.team2}}</th>
+              <!--<th>{{match.city}}</th>-->
+            </tr>
+          {% else %}
+            <tr>
+              <th>{{match.date}}</th>
+              <th>{{match.time}}</th>
+              <th><img src="{% static 'images/'|add:match.team1|add:'.png' %}" widht="50px" height="50px"></img>{{match.team1}}</th>
+              <th><img src="{% static 'images/'|add:match.team2|add:'.png' %}" widht="50px" height="50px"></img>{{match.team2}}</th>
+              <!--<th>{{match.city}}</th>-->
+            </tr>
+          {% endif %}
         {% endfor %}
       </tbody>
       

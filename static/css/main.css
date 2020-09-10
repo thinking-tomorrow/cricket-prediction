@@ -36,10 +36,11 @@ body{
 
     .content{
         width: 95%;
+        padding: 0;
     }
 
     .content-outer{
-        margin: 10px;
+        margin: 20px 0;
     }    
 }
 

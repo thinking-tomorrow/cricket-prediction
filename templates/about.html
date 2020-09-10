@@ -20,6 +20,7 @@
 
     <script>
       $(document).ready(function (){
+
         $('[data-toggle="popover"]').each( function() {
           //try doing console log out of popover.
           id = $(this).attr('id');
@@ -41,20 +42,18 @@
             animation: true,
           }); 
         });
-
-
       });
     </script>
 
   <center class="content-outer">
     <div class='content'>
 
-      <div class="row">
+      <div class="row" id='top-col'>
         <div class="col-sm-4">
           <img src="{% static 'images/logo_think_tom.png' %}" style="width: 80%">
         </div>
         <div class="col-sm-8">
-          <h3><b>THINKING TOMORROW</b></h3>
+          <h3 id='top-header'><b>THINKING TOMORROW</b></h3>
           <p>THINKING TOMORROW is a non-profittable organisation, founded by Sajjad Ahmed and Hrishikesh Bhanja, that seeks to transfom the world through
           the use of technology .  We have made many such products like this that aim to help mankind in their day to day activities . 
           <a href="http://thinkingtomorrow.cf" target="_blank">Please visit our website</a> for more details or contact us 

@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<script>
+  $(document).ready(function (){
+    type('PREDICTION PAGE', 'heading');
+  });
+</script>
+
 <center class="content-outer">
   <div class='content'>
     
-    <h1 class="text text-danger font-weight-bolder">Prediction Page</h1>
+    <h1 class="text text-danger font-weight-bolder" id="heading"></h1>
     
     <form method="POST" action="prediction" class='prediction-form'>
         {% csrf_token %}
