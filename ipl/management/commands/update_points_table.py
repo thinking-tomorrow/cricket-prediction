@@ -1,11 +1,12 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Count
-from ipl.models import Schedule, PointsTable
+from ipl.models import Schedule, PointsTable, OriginalPointsTable
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        table = Schedule.objects.values('predicted_winner').annotate(the_count=Count('predicted_winner'))
+        PointsTable.objects.all().delete()
+        table = Schedule.objects.values('predicted_winner').annotate(the_count=Count('predicted_winner')).filter(id__lte=56)
 
         for team in table:
             team_points=PointsTable()
@@ -19,3 +20,6 @@ class Command(BaseCommand):
             team_points.team=name
             team_points.points=won*2
             team_points.save()
+        
+        OriginalPointsTable.objects.all().delete()
+        OriginalPointsTable.load_table()

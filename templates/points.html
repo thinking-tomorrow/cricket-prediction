@@ -9,10 +9,22 @@
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
     color: white;
   }
+
+  .heading{
+    /**background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;**/
+    color: #09009f;
+    width: 40%;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  }
 </style>
 
 <center class="content-outer">
   <div class='content' style="background: none; background-color: rgb(255, 248, 248);">
+
+    <h2 class='heading'>PREDICTED POINTS TABLE</h2>
     
     <table class="table table-responsive" style="width: 50%">
       <thead>
@@ -26,7 +38,7 @@
       </thead>
 
       <tbody>
-        {% for teams in points %}
+        {% for teams in predicted_points %}
           <tr>
             <th>{{teams.team}}</th>
             <th>{{teams.played}}</th>
@@ -40,6 +52,37 @@
       </tbody>
       
     </table>
+
+    <br><br>
+    <h2 class='heading'>ORIGINAL POINTS TABLE</h2>
+
+    <table class="table table-responsive" style="width: 50%">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Played</th>
+          <th>Won</th>
+          <th>Lost</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for teams in original_points %}
+          <tr>
+            <th>{{teams.team}}</th>
+            <th>{{teams.played}}</th>
+            
+            <th>{{teams.won}}</th>
+            <th>{{teams.lost}}</th>
+            <th>{{teams.points}}</th>
+
+          </tr>
+        {% endfor %}
+      </tbody>
+      
+    </table>
+
   </div>
 </center>
 {% endblock content %}
