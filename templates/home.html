@@ -17,7 +17,14 @@
   }
 
   .carousel-img{
-    width: 10px;
+    height: 10px;
+  }
+
+  .carousel-caption {
+    background: -webkit-linear-gradient(45deg, #22c1c3, #fdbb2d 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: red;
   }
 
   @media only screen and (max-width: 600px) {
@@ -87,26 +94,16 @@
   </div>
 </div>
 
-
-
-
-
 <center class="content-outer">
 	<div class="content" style="background: white; color: black; width:100%;">
 
+    <!-- <img src="{% static 'images/tom.png' %}" style="width:450px; height:400px"> -->
+    <img src="{% static 'images/ipl.png' %}" style="width:500px; height:500px">
+    <h1 style="margin-top: 0px;"><b>INDIAN PREMIER LEAGUE</b></h1>
 
+    <br><br><br>
 
-
-
-	<img src="{% static 'images/ipl.png' %}" style="width:500px; height:500px">
-
-
-	<h1 style="margin-top: 0px;"><b>INDIAN PREMIER LEAGUE</b></h1>
-
-
-	<br><br><br>
-
-<div class="row">
+    <div class="row">
 			<div class='col-sm-6'>
 				<div class="card card-flip h-100">
 					<div class="card-front">
@@ -158,8 +155,15 @@
 		<br><br><br>
 
 
-	<h2 style="text-align:left; margin-left: 10px;"><B>IPL IN NUMBERS</B></h2>
+	<h2><b>IPL IN NUMBERS</b></h2>
 
+  <h3>2019 STATS</h3>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <img src="{% static 'images/players/suresh.jpg' %}" style="width: 50%; height: 40%;">
+    </div>
+  </div>
 
 	<br><br><br>
 
