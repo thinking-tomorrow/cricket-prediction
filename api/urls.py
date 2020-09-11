@@ -19,6 +19,7 @@ urlpatterns = [
     path('winner',views.predict_winner,name='winner'),
     path('wickets',views.wickets,name='wickets'),
     path('catches',views.catches,name='catches'),
-    path('qualifiers',views.qualifiers,name='qualifiers')
+    path('qualifiers',views.qualifiers,name='qualifiers'),
+    path('batsman',views.batsman,name='batsman')
 ]
  
