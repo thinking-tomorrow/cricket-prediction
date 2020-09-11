@@ -133,6 +133,19 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function(){
 
 
+url='api/batsman';
+  $.get(url, function(data){
+    runs=convert_to_list(data);
+    console.log(runs)
+
+    plot_chart('nothing', 'column', 'Most Successful Batsmen in IPL', runs[0], runs[1], 'Runs Scored')
+  });
+
+});
+
+$(document).ready(function(){
+
+
 url='api/wickets';
   $.get(url, function(data){
     wickets=convert_to_list(data);
@@ -155,3 +168,4 @@ url='api/catches';
   });
 
 });
+

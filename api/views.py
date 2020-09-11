@@ -207,11 +207,11 @@ def batsman(request):
 
     sql="SELECT batsman, SUM(batsman_runs) as sum FROM deliveries GROUP BY batsman ORDER BY sum DESC LIMIT 15"
     data = execute_query(sql)
-    data_dict = {j[0]:j[1] for j in data}
+    data_dict = {j[0]:int(j[1]) for j in data}
     return JsonResponse({'status':'success','data':data_dict})
 
 
-    
+
 def predict_match_winner(team1, team2):
     teams_list = sorted([
         'Sunrisers Hyderabad', 'Mumbai Indians', 'Royal Challengers Bangalore',
