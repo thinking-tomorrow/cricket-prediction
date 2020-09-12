@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from bs4 import BeautifulSoup
 import requests
-from .models import Schedule, PointsTable
+from .models import Schedule, PointsTable, OriginalPointsTable
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 from sqlalchemy import create_engine
@@ -106,8 +106,9 @@ def match(request):
 
 
 def points_table(request):
-    points = PointsTable.objects.order_by('-points')
-    return render(request, 'points.html',{'points':points})
+    predicted_points = PointsTable.objects.order_by('-points')
+    original_points = OriginalPointsTable.objects.order_by('points', 'nrr')
+    return render(request, 'points.html',{'predicted_points':predicted_points, 'original_points': original_points})
 
 def qualifiers(request):
     schedule_all = Schedule.objects.all()[56:]

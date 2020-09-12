@@ -75,3 +75,30 @@ class PointsTable(models.Model):
     won = models.IntegerField()
     lost = models.IntegerField()
     points = models.IntegerField()
+
+class OriginalPointsTable(models.Model):
+
+    team = models.TextField()
+    played = models.IntegerField()
+    won = models.IntegerField()
+    lost = models.IntegerField()
+    points = models.IntegerField()
+    nrr = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def load_table():
+        link = "https://www.iplt20.com/points-table/2020"
+        soup = BeautifulSoup(requests.get(link).text, 'lxml')
+
+        table = soup.find('table', class_='standings-table')
+        rows = table.findAll('tr')[1:]
+
+        for row in rows:
+            cols=row.findAll('td')
+            record = OriginalPointsTable()
+            record.team=cols[1].text.strip().split('\n')[0]
+            record.played=cols[2].text
+            record.won=cols[3].text
+            record.lost=cols[4].text
+            record.points=cols[10].text
+            record.nrr=cols[7].text
+            record.save()
