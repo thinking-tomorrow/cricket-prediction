@@ -13,6 +13,13 @@ class Command(BaseCommand):
         predicted_winners=ast.literal_eval(requests.get('http://127.0.0.1:8000/api/winner').json()['data'])
         
         for key, match in enumerate(matches):
-            match.predicted_winner=predicted_winners[key]
-            match.save()
-        
+            if key<=55:
+                match.predicted_winner=predicted_winners[key]
+                match.save()
+            else:
+                qualifier_winners=requests.get('http://127.0.0.1:8000/api/qualifiers').json()['data']
+                qf_type=match.qualifier_type
+                match.team1=qualifier_winners[qf_type]['winner']+' (Predicted)'
+                match.team2=qualifier_winners[qf_type]['loser']+' (Predicted)'
+                match.predicted_winner=qualifier_winners[qf_type]['winner']
+                match.save()

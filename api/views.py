@@ -57,6 +57,7 @@ def predict_winner_raw():
     fixtures = pd.read_sql('ipl_schedule',engine)
     fixtures.drop(['city','time'],axis=1,inplace=True)
     fixtures.drop(['id','day'],axis=1,inplace=True)
+    fixtures=fixtures.iloc[0:56]
     pred_set = []
 
     teams_local=fixtures['team1'].unique()
@@ -242,4 +243,6 @@ def qualifiers(response):
     q2_winner=predict_match_winner(el_winner['winner'], q1_winner['loser'])
     final_winner=predict_match_winner(q1_winner['winner'], q2_winner['winner'])
 
-    return JsonResponse({'status': 'success', 'data':{'winner': final_winner['winner']}})
+    data={'Qualifier 1': q1_winner, 'Eliminator': el_winner, 'Qualifier 2': q2_winner, 'Final': final_winner}
+
+    return JsonResponse({'status': 'success', 'data': data})
