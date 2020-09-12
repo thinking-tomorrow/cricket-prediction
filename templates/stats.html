@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+  thead, .qualifier-header{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
+    color: white;
+  }
+
+  
+</style>
+
+<center class="content-outer">
+
+
+
+  <div class='content' style="background: none; background-color: rgb(255, 248, 248);">
+
+  <h1 style="color: black;"><b>BATSMAN STATISTICS</b></h1>
+
+  <br><br><br>  
+    <table class="table table-responsive" style="width:30%;">
+      <thead>
+        <tr>
+          <th>Batsman</th>
+          <th>Runs</th>
+
+          <!--<th>City</th>-->
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for i,j in runs%}
+            <tr>
+              <td>{{i}}</td>
+              <td>{{j}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+      
+    </table>
+
+
+  <h1 style="color: black;"><b>BOWLER STATISTICS</b></h1>
+
+  <br><br><br> 
+
+       <table class="table table-responsive" style="width:30%;">
+      <thead>
+        <tr>
+          <th>Bowler</th>
+          <th>Wickets</th>
+
+          <!--<th>City</th>-->
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for i,j in wicket%}
+            <tr>
+              <td>{{i}}</td>
+              <td>{{j}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+      
+    </table>
+
+  </div>
+
+</center>
+
+{% endblock content %}

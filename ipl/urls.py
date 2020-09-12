@@ -12,5 +12,6 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('match',views.match,name='match'),
     path('points',views.points_table,name='points'),
-    path('qualifiers',views.qualifiers,name='qualifiers')
+    path('qualifiers',views.qualifiers,name='qualifiers'),
+    path('stats',views.stats,name='stats')
 ]

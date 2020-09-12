@@ -5,6 +5,17 @@ import requests
 from .models import Schedule, PointsTable
 from django.views.decorators.clickjacking import xframe_options_exempt
 
+from sqlalchemy import create_engine
+
+engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
+
+def execute_query(sql):
+    with engine.connect() as connection:
+        result = connection.execute(sql)
+        data = result.fetchall()
+    return data
+
+
 def scrape_schedule():
 
     source = requests.get("https://www.icccricketschedule.com/vivo-ipl-2020-schedule-team-venue-time-table-pdf-point-table-ranking-winning-prediction/").text
@@ -101,3 +112,67 @@ def points_table(request):
 def qualifiers(request):
     schedule_all = Schedule.objects.all()[56:]
     return render(request,'qualifier.html',{'schedule':schedule_all})
+
+
+def convert_to_format(dict):
+
+    key_list = []
+
+    for key in dict.keys():
+
+        key_list.append(key)
+
+    value_list = list(dict.values())
+
+    data_dict = {}
+
+    data_dict['keys'] = key_list
+    data_dict['values'] = value_list
+
+    return data_dict
+
+def batsman():
+
+    sql="SELECT batsman, SUM(batsman_runs) as sum FROM deliveries GROUP BY batsman ORDER BY sum DESC LIMIT 15"
+    data = execute_query(sql)
+    data_dict = {j[0]:int(j[1]) for j in data}
+
+    #data = convert_to_format(data_dict)
+
+    return data_dict
+
+def bowler():
+
+    sql = "SELECT bowler, COUNT(*) FROM deliveries WHERE is_wicket=1 AND dismissal_kind!='run out' GROUP BY bowler ORDER BY `COUNT(*)` DESC LIMIT 15"
+    data=execute_query(sql)
+    data_dict = {j[0]:j[1] for j in data}
+
+    return data_dict
+
+def stats(request):
+
+    runs = batsman()
+
+    keys = []
+
+    for key in runs.keys():
+
+        keys.append(key)
+
+    values = list(runs.values())
+
+    runs = zip(keys,values)
+
+    wickets = bowler()
+
+    keys_2 = []
+
+    for key in wickets.keys():
+
+        keys_2.append(key)
+
+    values_2 = list(wickets.values())
+
+    wicket = zip(keys_2,values_2)
+
+    return render(request, 'stats.html',{'runs':runs,'wicket':wicket})
