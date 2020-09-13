@@ -28,6 +28,7 @@
           <th>Time</th>
           <th>Team 1</th>
           <th>Team 2</th>
+          <th>Predicted Winner</th>
           <!--<th>City</th>-->
         </tr>
       </thead>
@@ -39,12 +40,14 @@
 						<th></th>
 						<th></th>
 						<th></th>
+            <th></th>
 					</tr>
 					<tr>
 						<th>{{match.date}}</th>
 						<th>{{match.time}}</th>
 						<th>{{match.team1}}</th>
 						<th>{{match.team2}}</th>
+            <th>{{match.predicted_winner}}</th>
 						<!--<th>{{match.city}}</th>-->
 					</tr>
         {% endfor %}

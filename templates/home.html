@@ -71,12 +71,15 @@ width:500px;height:500px;
 </style>
 
 <script type="text/javascript">
-	/*$(document).ready(function (){
+	$(document).ready(function (){
+		var executed=0;
 		$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
-			var x = document.getElementById("sound");
-			x.play();
+				var x = document.getElementById("sound");
+				x.play();
+				executed+=1;
+			
 		});  
-	});*/
+	});
 </script>
 
 <!--<div class="bd-example">
@@ -208,7 +211,7 @@ width:500px;height:500px;
 							
 						<div style="display:inline-block;vertical-align:top;float: left;">
 								<br><br>
-								<img src="{% static 'images/virat.png' %}" class="player_logos">
+								<img src="{% static 'images/virat.png' %}" width= "100%" class="player_logos">
 								
 							</div>
 
@@ -411,7 +414,7 @@ width:500px;height:500px;
 							<br><br><br>
 							<h3 style="color:red;"><b>MUMBAI INDIANS</b></h3>
 							<br><br>
-							<h4><b>109 WINS</b></h4>
+							<h4><b>107 WINS</b></h4>
 						</div>
 
 						</div>
