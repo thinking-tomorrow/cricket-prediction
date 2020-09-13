@@ -72,13 +72,12 @@ width:500px;height:500px;
 
 <script type="text/javascript">
 	$(document).ready(function (){
-		var executed=false;
+		var executed=0;
 		$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
-			if (executed==false){
 				var x = document.getElementById("sound");
 				x.play();
-				executed=true;
-			}
+				executed+=1;
+			
 		});  
 	});
 </script>
@@ -413,7 +412,7 @@ width:500px;height:500px;
 							<br><br><br>
 							<h3 style="color:red;"><b>MUMBAI INDIANS</b></h3>
 							<br><br>
-							<h4><b>109 WINS</b></h4>
+							<h4><b>107 WINS</b></h4>
 						</div>
 
 						</div>
