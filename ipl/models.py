@@ -1,6 +1,8 @@
 from django.db import models
 from bs4 import BeautifulSoup
 import requests
+import datetime 
+import time
 
 class Matches(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -20,15 +22,16 @@ class Matches(models.Model):
     mom = models.TextField()
     
 class Schedule(models.Model):
-    qualifier_type=models.TextField(default=None)
+    qualifier_type=models.TextField(null=True)
     team1 = models.TextField()
     team2 = models.TextField()
     date = models.TextField()
+    new_date = models.DateField()
     day = models.TextField()
     time = models.TextField()
     city = models.TextField()
-    predicted_winner=models.TextField()
-    original_winner=models.TextField()
+    predicted_winner=models.TextField(null=True)
+    original_winner=models.TextField(null=True)
 
     def load_schedule():
         
@@ -53,6 +56,12 @@ class Schedule(models.Model):
 
             matches = Schedule()
             
+            format = '%d %B %Y' # The format 
+            datetime_str = datetime.datetime.strptime(new[2], format) 
+
+
+               
+
             team = new[1]
 
             team1=team.split('Vs')[0]
@@ -62,6 +71,7 @@ class Schedule(models.Model):
             matches.team2 = team2.strip()
             matches.date = new[2]
             matches.day = new[3]
+            matches.new_date = datetime_str.strftime('%Y-%m-%d')
             matches.time = new[4]
             matches.city = new[5]
 

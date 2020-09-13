@@ -148,9 +148,11 @@ width:500px;height:500px;
 							<h3>UPCOMING MATCH</h3>
 							<b><p id="timer" style="color: red;">10: 50</p></b>
 							<div>
-								<img src="{% static 'images/Mumbai Indians (MI).png' %}" class="team_logos">
+								<img src="{% static 'images/'|add:team1|add:'.png' %}" class="team_logos"></img>
 								<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
-								<img src="{% static 'images/Rajasthan Royals (RR).png' %}" class="team_logos">
+
+              					<img src="{% static 'images/'|add:team2|add:'.png' %}" class="team_logos"></img>
+
 							</div>
 						</div>
 					</div>

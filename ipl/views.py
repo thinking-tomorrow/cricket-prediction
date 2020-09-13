@@ -5,6 +5,8 @@ import requests
 from .models import Schedule, PointsTable, OriginalPointsTable
 from django.views.decorators.clickjacking import xframe_options_exempt
 
+import datetime, time
+
 from sqlalchemy import create_engine
 
 engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
@@ -42,7 +44,25 @@ def scrape_schedule():
         matches.save()        
 
 def home(request):
-    return render(request, 'home.html')
+
+    today = datetime.date.today()
+
+
+
+    schedule = Schedule.objects.order_by('id')
+
+    today = datetime.date.today()
+
+    today = today.strftime('%Y-%m-%d')
+
+    schedule = Schedule.objects.filter(new_date__gt=today)
+
+    next_game = schedule[0]
+
+    team1 = next_game.team1
+    team2 = next_game.team2
+
+    return render(request, 'home.html',{'team1':team1,'team2':team2})
 
 @xframe_options_exempt
 def prediction(request):
