@@ -72,9 +72,13 @@ width:500px;height:500px;
 
 <script type="text/javascript">
 	$(document).ready(function (){
+		var executed=false;
 		$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
-			var x = document.getElementById("sound");
-			x.play();
+			if (executed==false){
+				var x = document.getElementById("sound");
+				x.play();
+				executed=true;
+			}
 		});  
 	});
 </script>
