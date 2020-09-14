@@ -52,6 +52,19 @@ def home(request):
 
     team1 = next_game.team1
     team2 = next_game.team2
+
+    games = Schedule.objects.filter(new_date__lt=today)
+
+    '''reversed_games = games.reverse()[0]
+
+    last_game = games[length]
+
+    last_team1 = reversed_games.team1
+    last_team2 = reversed_games.team2
+
+    print(last_team1)
+    print(last_team2)'''
+
     date = next_game.new_date
     game_time = next_game.time
 
@@ -64,7 +77,7 @@ def home(request):
     date_time=datetime.datetime(year, month, day, hour, int(minute))
     timestamp=time.mktime(date_time.timetuple())
     
-    return render(request, 'home.html',{'team1':team1,'team2':team2, 'timestamp': timestamp})
+    return render(request, 'home.html',{'team1':team1,'team2':team2, 'timestamp': timestamp})#'last_team1':last_team1, 'last_team2':last_team2})
 
 @xframe_options_exempt
 def prediction(request):
