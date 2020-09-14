@@ -3,7 +3,7 @@ $(document).ready(function(){
   d=parseInt(document.getElementById("timer").innerHTML)
   var countDownDate = new Date(d*1000);
   //console.log(d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear());
-  console.log(d)
+  console.log(d);
 
   // Update the count down every 1 second
   var x = setInterval(function() {

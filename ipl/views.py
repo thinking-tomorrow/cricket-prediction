@@ -67,8 +67,9 @@ def home(request):
     tz = pytz.timezone("Asia/Kolkata")
     date_time=datetime.datetime(year, month, day, hour, int(minute), tzinfo=tz)
     timestamp=time.mktime(date_time.timetuple())
-    
-    return render(request, 'home.html',{'team1':team1,'team2':team2, 'timestamp': timestamp})#'last_team1':last_team1, 'last_team2':last_team2})
+    print(timestamp)
+
+    return render(request, 'home.html',{'team1':team1,'team2':team2, 'timestamp': timestamp})
 
 @xframe_options_exempt
 def prediction(request):
