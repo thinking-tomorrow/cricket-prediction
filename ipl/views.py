@@ -4,9 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 from .models import Schedule, PointsTable, OriginalPointsTable
 from django.views.decorators.clickjacking import xframe_options_exempt
-
 import datetime, time
-
 from sqlalchemy import create_engine
 
 engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
@@ -55,15 +53,6 @@ def home(request):
 
     games = Schedule.objects.filter(new_date__lt=today)
 
-    '''reversed_games = games.reverse()[0]
-
-    last_game = games[length]
-
-    last_team1 = reversed_games.team1
-    last_team2 = reversed_games.team2
-
-    print(last_team1)
-    print(last_team2)'''
 
     date = next_game.new_date
     game_time = next_game.time
@@ -151,64 +140,52 @@ def qualifiers(request):
 
 
 def convert_to_format(dict):
-
     key_list = []
-
     for key in dict.keys():
-
         key_list.append(key)
 
     value_list = list(dict.values())
 
     data_dict = {}
-
     data_dict['keys'] = key_list
     data_dict['values'] = value_list
-
     return data_dict
 
 def batsman():
-
     sql="SELECT batsman, SUM(batsman_runs) as sum FROM deliveries GROUP BY batsman ORDER BY sum DESC LIMIT 15"
     data = execute_query(sql)
     data_dict = {j[0]:int(j[1]) for j in data}
-
-    #data = convert_to_format(data_dict)
-
     return data_dict
 
 def bowler():
-
     sql = "SELECT bowler, COUNT(*) FROM deliveries WHERE is_wicket=1 AND dismissal_kind!='run out' GROUP BY bowler ORDER BY `COUNT(*)` DESC LIMIT 15"
     data=execute_query(sql)
     data_dict = {j[0]:j[1] for j in data}
-
     return data_dict
 
 def stats(request):
-
     runs = batsman()
-
     keys = []
 
     for key in runs.keys():
-
         keys.append(key)
-
+    
     values = list(runs.values())
-
     runs = zip(keys,values)
-
+    
     wickets = bowler()
-
     keys_2 = []
-
+    
     for key in wickets.keys():
-
         keys_2.append(key)
 
     values_2 = list(wickets.values())
-
     wicket = zip(keys_2,values_2)
-
     return render(request, 'stats.html',{'runs':runs,'wicket':wicket})
+
+def log(request, ip):
+    print(ip)
+    with open('log.txt', 'a') as log_file:
+        log_file.write(ip+'\n')
+    
+    return HttpResponse()

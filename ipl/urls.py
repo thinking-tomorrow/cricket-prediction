@@ -13,5 +13,6 @@ urlpatterns = [
     path('match',views.match,name='match'),
     path('points',views.points_table,name='points'),
     path('qualifiers',views.qualifiers,name='qualifiers'),
-    path('stats',views.stats,name='stats')
+    path('stats',views.stats,name='stats'),
+    path('log/<str:ip>',views.log,name='log')
 ]

@@ -12,12 +12,29 @@
 
 <script type="text/javascript">
 	$(document).ready(function (){
-		/**var executed=0;
+		var executed=0;
 		$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
-			var x = document.getElementById("sound");
-			x.play();
-			executed+=1;
-		});**/  
+			if (executed==0){
+				var x = document.getElementById("sound");
+				x.play();
+				executed=1;
+			}
+		});  
+
+		$.get("http://localhost:8000/api/qualifiers", function(data){
+			winner=data['data']['Final']['winner'];
+			var initials = winner.split(' ').map(x => x.charAt(0)).join('').toUpperCase();
+			var img_src='static/images/'+winner+' ('+initials+').png';
+			
+			$('#predicted_winner_name').html(winner);
+			$("#predicted_winner_img").attr("src", img_src);
+		});
+
+		$.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
+			ip=data.split('\n')[2];
+			console.log(ip)
+			$.get('http://localhost:8000/log/'+ip, function(d){});
+		})
 	});
 </script>
 
@@ -357,17 +374,14 @@
 					<div class="card-front">
 						<div class="card-body">
 							<h3>OUR PREDICTION-IPL 2020 WINNER</h3>
-						<div style="display:inline-block;vertical-align:top;">
-							<br><br><br>
-							<img src="{% static 'images/Kolkata Knight Riders (KKR).png' %}" class="team_logos">
+							<div style="display:inline-block;vertical-align:top;">
+								<br><br><br>
+								<img src="{% static 'images/loading.gif' %}" class="team_logos" id='predicted_winner_img'>
+								<br><br><br>
+								<b><h3 style="color:red;" id='predicted_winner_name'></h3></b>
+								<br><br>
 								
 							</div>
-							<div>
-							<br><br><br>
-							<h3 style="color:red;"><b>KOLKATA KNIGHT RIDERS</b></h3>
-							<br><br>
-							
-						</div>
 
 						</div>
 					</div>
