@@ -35,12 +35,8 @@
 
       <tbody>
         {% for match in schedule %}
-					<tr colspan="5" class='qualifier-header'>
-						<th>{{match.qualifier_type}}</th>
-						<th></th>
-						<th></th>
-						<th></th>
-            <th></th>
+					<tr class='qualifier-header'>
+						<th colspan="5">{{match.qualifier_type}}</th>
 					</tr>
 					<tr>
 						<th>{{match.date}}</th>
