@@ -29,6 +29,12 @@
 			$('#predicted_winner_name').html(winner);
 			$("#predicted_winner_img").attr("src", img_src);
 		});
+
+		$.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
+			ip=data.split('\n')[2];
+			console.log(ip)
+			$.get('http://localhost:8000/log/'+ip, function(d){});
+		})
 	});
 </script>
 
