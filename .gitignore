@@ -2,3 +2,4 @@
 .idea/
 model.pkl
 matches.pkl
+log.txt

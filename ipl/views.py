@@ -5,6 +5,7 @@ import requests
 from .models import Schedule, PointsTable, OriginalPointsTable
 from django.views.decorators.clickjacking import xframe_options_exempt
 import datetime, time
+import pytz
 from sqlalchemy import create_engine
 
 engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
@@ -63,7 +64,8 @@ def home(request):
     hour, minute=game_time.split(' ')[1].split(':')
     hour=int(hour)+12
 
-    date_time=datetime.datetime(year, month, day, hour, int(minute))
+    tz = pytz.timezone("Asia/Kolkata")
+    date_time=datetime.datetime(year, month, day, hour, int(minute), tzinfo=tz)
     timestamp=time.mktime(date_time.timetuple())
     
     return render(request, 'home.html',{'team1':team1,'team2':team2, 'timestamp': timestamp})#'last_team1':last_team1, 'last_team2':last_team2})
