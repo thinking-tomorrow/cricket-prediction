@@ -44,25 +44,27 @@ def scrape_schedule():
         matches.save()        
 
 def home(request):
-
     today = datetime.date.today()
-
-
-
-    schedule = Schedule.objects.order_by('id')
-
-    today = datetime.date.today()
-
     today = today.strftime('%Y-%m-%d')
 
     schedule = Schedule.objects.filter(new_date__gt=today)
-
     next_game = schedule[0]
 
     team1 = next_game.team1
     team2 = next_game.team2
+    date = next_game.new_date
+    game_time = next_game.time
 
-    return render(request, 'home.html',{'team1':team1,'team2':team2})
+    year=date.year
+    month=date.month
+    day=date.day
+    hour, minute=game_time.split(' ')[1].split(':')
+    hour=int(hour)+12
+
+    date_time=datetime.datetime(year, month, day, hour, int(minute))
+    timestamp=time.mktime(date_time.timetuple())
+    
+    return render(request, 'home.html',{'team1':team1,'team2':team2, 'timestamp': timestamp})
 
 @xframe_options_exempt
 def prediction(request):

@@ -1,0 +1,35 @@
+.logo{
+	width:500px; height:500px
+}
+
+.team_logos{
+	width:150px; height:150px
+}
+
+.player_logos{
+	width:500px; height:350px; float: right;
+}
+
+.table_points{
+	width:500px;height:500px;
+}
+
+@media only screen and (max-width: 600px) {
+
+	.logo{
+		width:350px;
+		height: 350px;
+	}
+
+	.team_logos{
+		width: 100px;
+		height: 100px;
+	}
+	.player_logos{
+		width:400px; height:350px; float: right;
+	}
+}
+
+.table_points{
+	height:500px;width: 300px;
+}

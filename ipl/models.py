@@ -40,11 +40,6 @@ class Schedule(models.Model):
 
         table = soup.find('table')
 
-        '''for matches in table:
-
-            rows = matches.find_all('td')
-            print(rows[1])'''
-
         matches_rows = table.find_all('tr')
         matches_rows=matches_rows[1:]
 
@@ -58,9 +53,6 @@ class Schedule(models.Model):
             
             format = '%d %B %Y' # The format 
             datetime_str = datetime.datetime.strptime(new[2], format) 
-
-
-               
 
             team = new[1]
 
