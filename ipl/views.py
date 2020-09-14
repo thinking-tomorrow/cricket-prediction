@@ -8,7 +8,7 @@ import datetime, time
 import pytz
 from sqlalchemy import create_engine
 
-engine = create_engine('mysql+pymysql://root:@localhost/cricket_prediction', echo=False)
+engine = create_engine('mysql+pymysql://sajjad:sajjad@2020@localhost/cricket_prediction', echo=False)
 
 def execute_query(sql):
     with engine.connect() as connection:
@@ -84,7 +84,7 @@ def prediction(request):
         data['bat_team'] = request.POST['bat_team']
         data['bowl_team'] = request.POST['bowl_team']
 
-        response=requests.post(url='http://localhost:8000/api/predict_score', data=data).json()
+        response=requests.post(url='https://www.cricology.tech/api/predict_score', data=data).json()
         
         if response['status']=='success':
             predicted_score=response['data']['predicted_score']

@@ -21,7 +21,7 @@
 			}
 		});  
 
-		$.get("http://localhost:8000/api/qualifiers", function(data){
+		$.get("api/qualifiers", function(data){
 			winner=data['data']['Final']['winner'];
 			var initials = winner.split(' ').map(x => x.charAt(0)).join('').toUpperCase();
 			var img_src='static/images/'+winner+' ('+initials+').png';
@@ -33,7 +33,7 @@
 		$.get('https://www.cloudflare.com/cdn-cgi/trace', function(data) {
 			ip=data.split('\n')[2];
 			console.log(ip)
-			$.get('http://localhost:8000/log/'+ip, function(d){});
+			$.get('log/'+ip, function(d){});
 		})
 	});
 </script>

@@ -2,4 +2,8 @@
 .idea/
 model.pkl
 matches.pkl
+<<<<<<< HEAD
 log.txt
+=======
+log.txt
+>>>>>>> 5d3dd45c106ce98df1fed08f61df26edf2fb187c
