@@ -7,8 +7,13 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 import datetime, time
 import pytz
 from sqlalchemy import create_engine
+import os
 
-engine = create_engine('mysql+pymysql://sajjad:sajjad@2020@localhost/cricket_prediction', echo=False)
+DB_USER=os.environ['DB_USER'].strip()
+DB_PASSWORD=os.environ['DB_PASSWORD'].strip()
+ROOT=os.environ['ROOT_URL'].strip()
+
+engine = create_engine('mysql+pymysql://'+DB_USER+':'+DB_PASSWORD+'@localhost/cricket_prediction', echo=False)
 
 def execute_query(sql):
     with engine.connect() as connection:
@@ -64,12 +69,12 @@ def home(request):
     hour, minute=game_time.split(' ')[1].split(':')
     hour=int(hour)+12
 
-    tz = pytz.timezone("Asia/Kolkata")
-    date_time=datetime.datetime(year, month, day, hour, int(minute), tzinfo=tz)
-    timestamp=time.mktime(date_time.timetuple())
-    print(timestamp)
-
-    return render(request, 'home.html',{'team1':team1,'team2':team2, 'timestamp': timestamp})
+    # tz = pytz.timezone("Asia/Kolkata")
+    date_time=datetime.datetime(year, month, day, hour, int(minute))
+    # timestamp=time.mktime(date_time.timetuple())
+    # print(timestamp)
+    print(str(date_time))
+    return render(request, 'home.html',{'team1':team1,'team2':team2, 'date': str(date_time)})
 
 @xframe_options_exempt
 def prediction(request):
@@ -85,7 +90,7 @@ def prediction(request):
         data['bat_team'] = request.POST['bat_team']
         data['bowl_team'] = request.POST['bowl_team']
 
-        response=requests.post(url='https://www.cricology.tech/api/predict_score', data=data).json()
+        response=requests.post(url=f'{ROOT}/api/predict_score', data=data).json()
         
         if response['status']=='success':
             predicted_score=response['data']['predicted_score']

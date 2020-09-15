@@ -13,13 +13,13 @@
 <script type="text/javascript">
 	$(document).ready(function (){
 		var executed=0;
-		$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
+		/**$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
 			if (executed==0){
 				var x = document.getElementById("sound");
 				x.play();
 				executed=1;
 			}
-		});  
+		});**/  
 
 		$.get("api/qualifiers", function(data){
 			winner=data['data']['Final']['winner'];
@@ -53,7 +53,7 @@
 					<div class="card-front">
 						<div class="card-body">
 							<h3>UPCOMING MATCH</h3>
-							<b><p id="timer" style="color: red;">{{timestamp}}</p></b>
+							<b><p id="timer" style="color: red;">{{date}}</p></b>
 							<div>
 								<img src="{% static 'images/'|add:team1|add:'.png' %}" class="team_logos"></img>
 								<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">

@@ -1,9 +1,9 @@
 $(document).ready(function(){
   // Set the date we're counting down to
-  d=parseInt(document.getElementById("timer").innerHTML)
-  var countDownDate = new Date(d*1000);
+  d=document.getElementById("timer").innerHTML
+  var countDownDate = new Date(d);
   //console.log(d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear());
-  console.log(d);
+  console.log(d, countDownDate);
 
   // Update the count down every 1 second
   var x = setInterval(function() {

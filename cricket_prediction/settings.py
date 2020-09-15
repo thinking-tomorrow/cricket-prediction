@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cricket_prediction',
-        'USER': 'sajjad',
-        'PASSWORD': 'sajjad@2020',
+        'USER': os.environ['DB_USER'].strip(),
+        'PASSWORD': os.environ['DB_PASSWORD'].strip(),
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

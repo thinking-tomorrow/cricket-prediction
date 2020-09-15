@@ -12,8 +12,12 @@ import json
 import pickle
 import numpy as np
 from sqlalchemy import create_engine
+import os
 
-# Create your views here.
+DB_USER=os.environ['DB_USER'].strip()
+DB_PASSWORD=os.environ['DB_PASSWORD'].strip()
+
+engine = create_engine('mysql+pymysql://'+DB_USER+':'+DB_PASSWORD+'@localhost/cricket_prediction', echo=False)
 
 cols = ['runs', 'wickets', 'overs', 'runs_last_5', 'wickets_last_5', 'striker',
        'non-striker', 'bat_team_Chennai Super Kings',
@@ -31,8 +35,6 @@ teams = ['Sunrisers Hyderabad', 'Mumbai Indians', 'Gujarat Lions',
        'Kolkata Knight Riders', 'Delhi Daredevils', 'Kings XI Punjab',
        'Chennai Super Kings', 'Rajasthan Royals', 'Deccan Chargers',
        'Kochi Tuskers Kerala', 'Pune Warriors', 'Delhi Capitals']
-
-engine = create_engine('mysql+pymysql://sajjad:sajjad@2020@localhost/cricket_prediction', echo=False)
 
 def predict_score_raw(runs, wickets, overs, runs_last_5, wickets_last_5, striker, non_striker, bat_team, bowl_team):
     bat_team='bat_team_'+bat_team
