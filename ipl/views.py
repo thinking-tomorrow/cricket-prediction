@@ -43,7 +43,7 @@ def scrape_schedule():
         matches.date = new[2]
         matches.day = new[3]
         matches.time = new[4]
-        matches.city = new[5]
+        matches.city = new[6]
 
         matches.save()        
 
@@ -122,6 +122,10 @@ def call_func(request):
 
 def schedule(request):
     schedule_all = Schedule.objects.all()
+
+    for match in schedule_all:
+        match.date=str(match.new_date)
+        match.time=match.time.split(' ')[1]
     return render(request, 'schedule.html',{'schedule':schedule_all})
 
 def about(request):

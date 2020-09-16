@@ -11,15 +11,37 @@
 {% block content%}
 
 <script type="text/javascript">
-	$(document).ready(function (){
-		var executed=0;
-		/**$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
-			if (executed==0){
-				var x = document.getElementById("sound");
-				x.play();
-				executed=1;
+	function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
 			}
-		});**/  
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+
+	$(document).ready(function (){
+		$("body,html").bind("touchstart touchmove scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
+			executed=getCookie('executed')
+			if (executed!='True'){
+				try{
+					var x = document.getElementById("sound");
+					x.volume=0.05;
+					x.play();
+					document.cookie = "executed=True";
+				}
+				catch(err){
+					alert('alsmals')
+				}
+			}
+		});
 
 		$.get("api/qualifiers", function(data){
 			winner=data['data']['Final']['winner'];
@@ -336,18 +358,17 @@
 					<div class="card-front">
 						<div class="card-body">
 							<h3>MOST SUCCESSFUL TEAMS(TROPHIES WON) IN IPL HISYORY</h3>
-						<div style="display:inline-block;vertical-align:top;">
-							<br><br><br>
-							<img src="{% static 'images/Mumbai Indians (MI).png' %}" class="team_logos">
+								<div style="display:inline-block;vertical-align:top;">
+									<br><br><br>
+									<img src="{% static 'images/Mumbai Indians (MI).png' %}" class="team_logos">
+								</div>
 								
-							</div>
-							<div style="display:inline-block;">
-							<br><br><br>
-							<h3 style="color:red;"><b>MUMBAI INDIANS</b></h3>
-							<br><br>
-							<h4><b>4 TROPHIES WON</b></h4>
-						</div>
-
+								<div style="display:inline-block;">
+									<br><br><br>
+									<h3 style="color:red;"><b>MUMBAI INDIANS</b></h3>
+									<br><br>
+									<h4><b>4 TROPHIES WON</b></h4>
+								</div>
 						</div>
 					</div>
 					<!--<div class="card-back bg-white">
