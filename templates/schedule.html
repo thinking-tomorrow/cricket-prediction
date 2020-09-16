@@ -11,6 +11,16 @@
     color: white;
   }
 
+  @media only screen and (max-width: 600px) {
+
+  .team{
+
+    display: none;
+
+  }
+}
+
+
   
 </style>
 
@@ -53,8 +63,8 @@
             <tr>
               <th>{{match.date}}</th>
               <th>{{match.time}}</th>
-              <th><img src="{% static 'images/'|add:match.team1|add:'.png' %}" widht="50px" height="50px"></img>{{match.team1}}</th>
-              <th><img src="{% static 'images/'|add:match.team2|add:'.png' %}" widht="50px" height="50px"></img>{{match.team2}}</th>
+              <th><img src="{% static 'images/'|add:match.team1|add:'.png' %}" widht="50px" height="50px"></img><span class="team">{{match.team1}}</span></th>
+              <th><img src="{% static 'images/'|add:match.team2|add:'.png' %}" widht="50px" height="50px"></img><span class="team">{{match.team2}}</span></th>
               <!--<th>{{match.city}}</th>-->
             </tr>
           {% endif %}
