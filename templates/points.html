@@ -19,6 +19,30 @@
     background: rgb(238,174,202);
     background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
   }
+
+  table{
+
+    width: 50%;
+  }
+
+    @media only screen and (max-width: 600px) {
+
+        .heading{
+    /**background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;**/
+    color: #09009f;
+    width: 100%;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  }
+
+  table{
+
+    width: 100%;
+
+  }
+}
 </style>
 
 <center class="content-outer">
@@ -26,7 +50,10 @@
 
     <h2 class='heading'>PREDICTED POINTS TABLE</h2>
     
-    <table class="table table-responsive" style="width: 50%">
+    <br><br>
+
+
+    <table class="table table-responsive">
       <thead>
         <tr>
           <th>Team</th>
@@ -56,7 +83,9 @@
     <br><br>
     <h2 class='heading'>ORIGINAL POINTS TABLE</h2>
 
-    <table class="table table-responsive" style="width: 50%">
+    <br><br>
+
+    <table class="table table-responsive">
       <thead>
         <tr>
           <th>Team</th>
