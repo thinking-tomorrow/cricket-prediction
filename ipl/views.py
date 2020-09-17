@@ -134,9 +134,13 @@ def about(request):
 def match(request):
     schedule_all = Schedule.objects.all()
 
-    for schedule in schedule_all:
-        schedule.team1_abr=schedule.team1.split(' ')[-1][1:-1]
-        schedule.team2_abr=schedule.team2.split(' ')[-1][1:-1]
+    for key, schedule in enumerate(schedule_all, start=1):
+        if key<=56:
+            schedule.team1_abr=schedule.team1.split(' ')[-1][1:-1]
+            schedule.team2_abr=schedule.team2.split(' ')[-1][1:-1]
+        else:
+            schedule.team1_abr=schedule.team1
+            schedule.team2_abr=schedule.team2
 
     return render(request,'match.html',{'schedule':schedule_all})
 

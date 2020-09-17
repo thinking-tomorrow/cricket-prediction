@@ -65,7 +65,7 @@ class Schedule(models.Model):
             matches.day = new[3]
             matches.new_date = datetime_str.strftime('%Y-%m-%d')
             matches.time = new[4]
-            matches.city = new[5]
+            matches.city = new[6]
 
             matches.save()
 

@@ -16,6 +16,11 @@
     background: linear-gradient(1deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 		color: white;
 	}
+  @media only screen and (max-width: 600px) {
+    .mobile-hide{
+      display: none;
+    }
+  }
 
 </style>
 
@@ -24,8 +29,8 @@
     <table class="table table-responsive" style="width: 85%">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Time</th>
+          <th class='mobile-hide'>Date</th>
+          <th class='mobile-hide'>Time</th>
           <th>Team 1</th>
           <th>Team 2</th>
           <th>Predicted Winner</th>
@@ -39,8 +44,8 @@
 						<th colspan="5">{{match.qualifier_type}}</th>
 					</tr>
 					<tr>
-						<th>{{match.date}}</th>
-						<th>{{match.time}}</th>
+						<th class='mobile-hide'>{{match.date}}</th>
+						<th class='mobile-hide'>{{match.time}}</th>
 						<th>{{match.team1}}</th>
 						<th>{{match.team2}}</th>
             <th>{{match.predicted_winner}}</th>

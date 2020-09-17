@@ -6,7 +6,6 @@ function convert_to_list(data){
     team_list.push(team);
     val_list.push(teams[team]);
   }
-
   return [team_list, val_list]
 }
 

@@ -56,11 +56,37 @@
 			ip=data.split('\n')[2];
 			console.log(ip)
 			$.get('log/'+ip, function(d){});
-		})
+		});
+
+		$('#modal_btn').click();
 	});
 </script>
 
 <center class="content-outer">
+	<!-- Button trigger modal -->
+	<button type="button" id='modal_btn' class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" style="display: none">
+	Launch demo modal
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLongTitle">Cricology</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			Cricology is a an Indian sports platform that allows user to predict the future of crciket matches and series.
+			We use Artificial Intelligence (Machine Learning) to predict the future of matches based on past trends and 
+			available data. It has been developed by Thinking Tomorrow. <a href="/about">Click here</a> to learn more.
+		</div>
+		</div>
+	</div>
+	</div>
+
 	<div class="content" style="background: white; color: black; width:100%;">
 
     <!-- <img src="{% static 'images/tom.png' %}" style="width:450px; height:400px"> -->
@@ -259,7 +285,7 @@
 
 <br><br><br>
 
-<div class="row">
+		<div class="row">
 			<br><br><br>
 			<div class='col-sm-6'>
 				<div class="card">
@@ -322,7 +348,7 @@
 
 		<br><br><br>
 
-<div class="row">
+		<div class="row">
 			<br><br><br>
 			<div class='col-sm-6'>
 				<div class="card">
