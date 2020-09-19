@@ -51,7 +51,7 @@ def home(request):
     today = datetime.date.today()
     today = today.strftime('%Y-%m-%d')
 
-    schedule = Schedule.objects.filter(new_date__gt=today)
+    schedule = Schedule.objects.filter(new_date__gte=today)
     next_game = schedule[0]
 
     team1 = next_game.team1
