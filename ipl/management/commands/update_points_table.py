@@ -8,12 +8,13 @@ class Command(BaseCommand):
         PointsTable.objects.all().delete()
         table = Schedule.objects.values('predicted_winner').annotate(the_count=Count('predicted_winner')).filter(id__lte=56)
 
-        for team in table:
+        for id, team in enumerate(table, start=1):
             team_points=PointsTable()
             
             name=team['predicted_winner']
             won=team['the_count']
 
+            team_points.id=id
             team_points.played=14
             team_points.lost=14-won
             team_points.won=won

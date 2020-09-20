@@ -79,7 +79,7 @@
 			</button>
 		</div>
 		<div class="modal-body">
-			Cricology is a an Indian sports platform that allows user to predict the future of crciket matches and series.
+			Cricology is a an Indian sports platform that allows user to predict the future of cricket matches and series.
 			We use Artificial Intelligence (Machine Learning) to predict the future of matches based on past trends and 
 			available data. It has been developed by Thinking Tomorrow. <a href="/about">Click here</a> to learn more.
 		</div>
@@ -125,13 +125,12 @@
 				<div class="card">
 					<div class="card-front">
 						<div class="card-body">
-							<h3>LAST MATCH WINNER</h3>
-							<br><br>
-							<!--<p style="display: inline-block">PREDICTED: KKR</p>
-							<p style="display: inline-block">ORIGINAL: KKR</p>-->
+							<h3>LAST MATCH</h3>
+							<b><p id="timer" style="color: red;">Winner - {{last_winner}}</p></b>
 							<div>
-								<h1><b>Season Not yet started!</b></h1>
-								
+								<img src="{% static 'images/'|add:last_team1|add:'.png' %}" class="team_logos"></img>
+								<img src="{% static 'images/vs_logo.jpg' %}" style="width:100px; height:50px">
+								<img src="{% static 'images/'|add:last_team2|add:'.png' %}" class="team_logos"></img>
 							</div>
 						</div>
 					</div>

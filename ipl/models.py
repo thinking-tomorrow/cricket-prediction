@@ -94,9 +94,10 @@ class OriginalPointsTable(models.Model):
         table = soup.find('table', class_='standings-table')
         rows = table.findAll('tr')[1:]
 
-        for row in rows:
+        for id, row in enumerate(rows, start=1):
             cols=row.findAll('td')
             record = OriginalPointsTable()
+            record.id=id
             record.team=cols[1].text.strip().split('\n')[0]
             record.played=cols[2].text
             record.won=cols[3].text

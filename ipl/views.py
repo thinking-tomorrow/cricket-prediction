@@ -51,15 +51,9 @@ def home(request):
     today = datetime.date.today()
     today = today.strftime('%Y-%m-%d')
 
-    schedule = Schedule.objects.filter(new_date__gt=today)
-    next_game = schedule[0]
-
+    next_game = Schedule.objects.filter(new_date=today)[0]
     team1 = next_game.team1
     team2 = next_game.team2
-
-    games = Schedule.objects.filter(new_date__lt=today)
-
-
     date = next_game.new_date
     game_time = next_game.time
 
@@ -69,12 +63,16 @@ def home(request):
     hour, minute=game_time.split(' ')[1].split(':')
     hour=int(hour)+12
 
-    # tz = pytz.timezone("Asia/Kolkata")
+    last_game = Schedule.objects.filter(new_date__lt=today)
+    last_game  = last_game[len(last_game)-1]
+    last_team1 = last_game.team1
+    last_team2 = last_game.team2
+    last_winner= last_game.original_winner
+
     date_time=datetime.datetime(year, month, day, hour, int(minute))
-    # timestamp=time.mktime(date_time.timetuple())
-    # print(timestamp)
-    print(str(date_time))
-    return render(request, 'home.html',{'team1':team1,'team2':team2, 'date': str(date_time)})
+    return render(request, 'home.html',{'team1':team1,'team2':team2, 'date': str(date_time), 
+                                        'last_team1':last_team1,'last_team2':last_team2, 'last_winner': last_winner})
+
 
 @xframe_options_exempt
 def prediction(request):
