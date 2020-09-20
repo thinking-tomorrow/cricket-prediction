@@ -20,38 +20,33 @@
     background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
   }
 
-  table{
-
-    width: 50%;
+  .table-responsive{
+    width: 60%;
   }
 
-    @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 600px) {
 
-        .heading{
-    /**background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;**/
-    color: #09009f;
-    width: 100%;
-    background: rgb(238,174,202);
-    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    .heading{
+      /**background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;**/
+      color: #09009f;
+      width: 100%;
+      background: rgb(238,174,202);
+      background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    }
+
+    .table-responsive{
+      width: 100%;
+    }
   }
-
-  table{
-
-    width: 100%;
-
-  }
-}
 </style>
 
 <center class="content-outer">
   <div class='content' style="background: none; background-color: rgb(255, 248, 248);">
-
     <h2 class='heading'>PREDICTED POINTS TABLE</h2>
     
     <br><br>
-
 
     <table class="table table-responsive">
       <thead>
@@ -93,6 +88,7 @@
           <th>Won</th>
           <th>Lost</th>
           <th>Points</th>
+          <th>NRR</th>
         </tr>
       </thead>
 
@@ -101,11 +97,10 @@
           <tr>
             <th>{{teams.team}}</th>
             <th>{{teams.played}}</th>
-            
             <th>{{teams.won}}</th>
             <th>{{teams.lost}}</th>
             <th>{{teams.points}}</th>
-
+            <th>{{teams.nrr}}</th>
           </tr>
         {% endfor %}
       </tbody>
